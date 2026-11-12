@@ -1,0 +1,6983 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Test Final de Rocas · Ígneas, Sedimentarias y Metamórficas</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* ============ base ============ */
+:root{
+  --bg:#eef1f0; --surface:#ffffff; --surface2:#e5eae8; --surface3:#f4f7f6;
+  --ink:#15201e; --muted:#54635e; --line:#cdd7d3;
+  --accent:#1c6b5f; --accent-ink:#ffffff;
+  --ig:#a8452f; --ig-soft:#f8e4de; --ig-line:#e5b8ab;
+  --sed:#8a651a; --sed-soft:#f8eed6; --sed-line:#e3cf9f;
+  --met:#1c6b5f; --met-soft:#dcefe9; --met-line:#a9d6c8;
+  --ok:#1b7a43; --okbg:#dcf1e4;
+  --bad:#b3261e; --badbg:#f8dddb;
+  --warn:#8a5a00; --warnbg:#f9ecd0;
+  --f-head:"Space Grotesk",system-ui,sans-serif;
+  --f-body:"Inter",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+  --r:12px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1514; --surface:#172120; --surface2:#1f2c2a; --surface3:#141c1b;
+    --ink:#e6efec; --muted:#9bada7; --line:#2c3c39;
+    --accent:#5cc4b0; --accent-ink:#06201b;
+    --ig:#f0a08a; --ig-soft:#3a211b; --ig-line:#6d3a2d;
+    --sed:#e2b252; --sed-soft:#362a12; --sed-line:#6b5321;
+    --met:#5cc4b0; --met-soft:#17332c; --met-line:#2e6156;
+    --ok:#72d498; --okbg:#173627;
+    --bad:#ff9d93; --badbg:#3d201e;
+    --warn:#e8b95c; --warnbg:#3a2d10;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1514; --surface:#172120; --surface2:#1f2c2a; --surface3:#141c1b;
+  --ink:#e6efec; --muted:#9bada7; --line:#2c3c39;
+  --accent:#5cc4b0; --accent-ink:#06201b;
+  --ig:#f0a08a; --ig-soft:#3a211b; --ig-line:#6d3a2d;
+  --sed:#e2b252; --sed-soft:#362a12; --sed-line:#6b5321;
+  --met:#5cc4b0; --met-soft:#17332c; --met-line:#2e6156;
+  --ok:#72d498; --okbg:#173627;
+  --bad:#ff9d93; --badbg:#3d201e;
+  --warn:#e8b95c; --warnbg:#3a2d10;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-body)}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px)) 56px max(16px,env(safe-area-inset-right,0px))}
+header.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:22px 0 12px}
+.kicker{font:500 11px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+h1{font:700 clamp(26px,4vw,38px)/1.05 var(--f-head);letter-spacing:-.02em;margin:0}
+.sub{color:var(--muted);font-size:13.5px;margin-top:5px}
+.icon-btn{background:var(--surface);border:1px solid var(--line);border-radius:999px;width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;font-size:16px;line-height:1}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent)}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:12;display:flex;gap:4px;overflow-x:auto;background:color-mix(in srgb,var(--bg) 93%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:6px 0;margin-bottom:18px}
+nav.tabs button{flex:none;background:transparent;border:0;color:var(--muted);font:600 14px var(--f-body);padding:9px 14px;border-radius:999px;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+main{min-height:55vh}
+h2{font:700 clamp(21px,3vw,28px)/1.15 var(--f-head);letter-spacing:-.01em;margin:0 0 8px}
+h3{font:700 16px/1.25 var(--f-head);margin:0 0 6px}
+p{margin:0 0 10px}
+.muted{color:var(--muted)}
+.small{font-size:12.5px}
+.stack{display:flex;flex-direction:column;gap:14px}
+.narrow{max-width:820px;margin:0 auto}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.row.between{justify-content:space-between}
+.row.end{justify-content:flex-end}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.panel.soft{background:var(--surface3)}
+.hero{background:linear-gradient(135deg,var(--surface) 0%,var(--surface3) 100%);border:1px solid var(--line);border-radius:16px;padding:22px}
+.hero .kicker{color:var(--accent)}
+.hero h2{max-width:760px}
+.hero p{max-width:760px}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:16px}
+@media (max-width:720px){.steps{grid-template-columns:1fr}}
+.stepbox{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}
+.stepbox b{display:block;font:600 12px var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:4px}
+.stepbox span{font-size:13px;color:var(--muted)}
+.btn{background:var(--accent);color:var(--accent-ink);border:0;border-radius:9px;padding:10px 16px;font-weight:650;box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.btn:hover{filter:brightness(1.06)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn.sm{padding:6px 10px;font-size:12.5px;border-radius:7px}
+.btn:disabled{opacity:.45;cursor:not-allowed;filter:none}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13px;color:var(--ink)}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tag{display:inline-flex;align-items:center;gap:5px;font:500 10.5px var(--f-mono);letter-spacing:.07em;text-transform:uppercase;padding:3px 7px;border-radius:5px;border:1px solid currentColor;white-space:nowrap}
+.tag.ig{color:var(--ig);background:var(--ig-soft)}
+.tag.sed{color:var(--sed);background:var(--sed-soft)}
+.tag.met{color:var(--met);background:var(--met-soft)}
+.tag.plain{color:var(--muted);background:var(--surface2)}
+.notice{border-radius:9px;padding:10px 12px;font-size:13.5px;background:var(--warnbg);color:var(--warn);border:1px solid color-mix(in srgb,var(--warn) 25%,transparent)}
+.notice.bad{background:var(--badbg);color:var(--bad);border-color:color-mix(in srgb,var(--bad) 25%,transparent)}
+.notice.ok{background:var(--okbg);color:var(--ok);border-color:color-mix(in srgb,var(--ok) 25%,transparent)}
+.notice.info{background:var(--surface2);color:var(--ink);border-color:var(--line)}
+.hook{background:var(--surface2);border-left:4px solid var(--accent);border-radius:7px;padding:9px 11px;font-size:13.5px}
+.hook b{font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent)}
+/* ============ test ============ */
+.test-wrap{max-width:1120px;margin:0 auto}
+.test-head{display:flex;flex-direction:column;gap:8px}
+.test-line{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.step-label{font:600 12px var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.progress{height:6px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--accent);transition:width .25s}
+.exam-grid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:18px;align-items:start}
+@media (max-width:900px){.exam-grid{grid-template-columns:1fr}}
+.photo-col{display:flex;flex-direction:column;gap:10px}
+@media (min-width:901px){.photo-col{position:sticky;top:74px}}
+.sample-photo{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.sample-photo img{width:100%;max-height:64vh;object-fit:contain;display:block;background:var(--surface2);cursor:zoom-in}
+.sample-photo figcaption{padding:8px 11px;font:400 11.5px var(--f-mono);color:var(--muted);border-top:1px solid var(--line)}
+.photo-hint{font-size:12.5px;color:var(--muted);padding:0 2px}
+.gate-panel{border-left:4px solid var(--accent)}
+.panel-head{display:flex;gap:11px;align-items:flex-start;margin-bottom:12px}
+.panel-head .num{flex:none;width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font:700 13px var(--f-mono)}
+.panel-head .num.two{background:var(--ink);color:var(--bg)}
+.field{display:flex;flex-direction:column;gap:5px}
+.field .lb{font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.field input[type=text],.field textarea,.field select{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 11px}
+.field textarea{min-height:78px;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent);outline:2px solid color-mix(in srgb,var(--accent) 25%,transparent);outline-offset:0}
+.field .hint{font-size:11.5px;color:var(--muted)}
+.field.locked .locked-box{display:flex;gap:8px;align-items:flex-start;background:var(--okbg);color:var(--ok);border:1px solid color-mix(in srgb,var(--ok) 30%,transparent);border-radius:8px;padding:9px 11px;font-size:13.5px}
+.field.locked .locked-box b{flex:none}
+.verdict-list{display:flex;flex-direction:column;gap:7px}
+.verdict{display:flex;gap:8px;align-items:flex-start;border-radius:8px;padding:9px 11px;font-size:13.5px}
+.verdict.ok{background:var(--okbg);color:var(--ok)}
+.verdict.bad{background:var(--badbg);color:var(--bad)}
+.verdict.pend{background:var(--surface2);color:var(--muted)}
+.verdict > b{flex:none;font-size:15px;line-height:1.2;margin-top:1px}
+.verdict .body{min-width:0;color:var(--ink)}
+.verdict .body .ans{display:block;color:var(--ink);margin-top:2px;font-size:12.5px}
+.verdict .body .ans b{color:var(--muted);font:500 10.5px var(--f-mono);text-transform:uppercase;letter-spacing:.05em}
+.verdict .body .mine{display:block;color:var(--muted);font-size:12.5px;margin-top:2px;overflow-wrap:anywhere}
+.gate-msg{border-left:4px solid var(--bad);background:var(--badbg);color:var(--ink);padding:10px 12px;border-radius:7px;font-size:13.5px;margin-top:8px}
+.gate-msg.pass{border-color:var(--ok);background:var(--okbg)}
+.gate-msg b{color:var(--bad)}
+.gate-msg.pass b{color:var(--ok)}
+.diag-meter{display:flex;justify-content:space-between;gap:8px;font:500 11px var(--f-mono);letter-spacing:.04em;color:var(--muted)}
+.diag-meter .ok{color:var(--ok)}
+.diag-meter .short{color:var(--bad)}
+.warn-line{color:var(--bad);font-size:12px}
+.table-form{display:flex;flex-direction:column;gap:11px}
+.score-line{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:2px}
+.score-line b{font-size:18px;font-family:var(--f-head)}
+/* ============ spec / correct row ============ */
+dl.spec{margin:0;display:grid;grid-template-columns:160px minmax(0,1fr);gap:8px 14px}
+dl.spec dt{font:500 10.5px var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding-top:3px}
+dl.spec dd{margin:0;min-width:0;overflow-wrap:anywhere}
+@media (max-width:560px){dl.spec{grid-template-columns:1fr;gap:2px}dl.spec dt{padding-top:8px}}
+.diag-list{margin:0;padding-left:1.15rem}
+.diag-list li{margin:2px 0}
+/* ============ study ============ */
+.study-head{display:flex;flex-direction:column;gap:11px;margin-bottom:15px}
+.study-tools{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.study-tools input[type=search]{flex:1 1 240px;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:9px 12px}
+.rock-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.rock-card{background:var(--surface);border:1px solid var(--line);border-radius:11px;overflow:hidden;padding:0;text-align:left;display:flex;flex-direction:column;transition:transform .12s,border-color .12s}
+.rock-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.rock-card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--surface2)}
+.rock-meta{padding:9px 10px 11px;display:flex;flex-direction:column;gap:5px;min-width:0}
+.rock-meta b{font-size:14px;line-height:1.2}
+.rock-meta .tag{align-self:flex-start}
+.count-line{font:500 11.5px var(--f-mono);letter-spacing:.05em;color:var(--muted)}
+.empty{padding:26px 14px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:10px}
+/* ============ table ============ */
+.tbl-wrap{overflow:auto;border:1px solid var(--line);border-radius:11px;background:var(--surface);max-height:74vh}
+table.big{border-collapse:separate;border-spacing:0;min-width:1180px;width:100%;font-size:12.5px}
+table.big th{position:sticky;top:0;z-index:3;background:var(--surface2);font:500 10.5px var(--f-mono);text-transform:uppercase;letter-spacing:.05em;text-align:left;padding:9px 10px;white-space:nowrap;border-bottom:1px solid var(--line)}
+table.big td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.big tbody tr:hover td{background:var(--surface3)}
+table.big th:first-child,table.big td:first-child{position:sticky;left:0;z-index:2;background:var(--surface);min-width:178px;max-width:210px}
+table.big th:first-child{background:var(--surface2);z-index:4}
+table.big tbody tr:hover td:first-child{background:var(--surface3)}
+.t-name{display:flex;gap:8px;align-items:flex-start}
+.t-name img{width:54px;height:42px;object-fit:cover;border-radius:5px;flex:none;background:var(--surface2)}
+.t-name b{display:block;font-size:13px;line-height:1.15}
+.t-name span{display:block;font-size:10.5px;color:var(--muted);margin-top:3px}
+.tbl-small{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl-small th,.tbl-small td{padding:7px 8px;border-top:1px solid var(--line);text-align:left;vertical-align:top}
+.tbl-small th{font:500 10.5px var(--f-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);border-top:0;background:var(--surface2)}
+.tbl-small tr:first-child th:first-child{border-top-left-radius:7px}
+/* ============ guide ============ */
+.guide-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:820px){.guide-grid{grid-template-columns:1fr}}
+.guide-table{width:100%;border-collapse:collapse;font-size:13px}
+.guide-table th,.guide-table td{padding:7px 8px;border-top:1px solid var(--line);text-align:left;vertical-align:top}
+.guide-table th{font:500 10.5px var(--f-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);border-top:0}
+.guide-table td:first-child{font-weight:600;white-space:nowrap}
+.figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.figure img{width:100%;display:block;background:#fff}
+.figure figcaption{padding:8px 10px;font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
+details{border:1px solid var(--line);border-radius:9px;padding:10px 12px;background:var(--surface)}
+details summary{cursor:pointer;font-weight:600}
+details[open] summary{margin-bottom:10px}
+/* ============ overlay ============ */
+.overlay{position:fixed;inset:0;z-index:40;background:rgba(5,12,10,.74);overflow:auto;padding:max(12px,env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) max(12px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))}
+.sheet{background:var(--bg);max-width:930px;margin:0 auto;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 14px;background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:2}
+.sheet-body{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6.5fr);gap:18px;padding:16px}
+@media (max-width:760px){.sheet-body{grid-template-columns:1fr}}
+.ficha-photo{display:flex;flex-direction:column;gap:8px;min-width:0}
+.ficha-photo #ficha-main{width:100%;max-height:58vh;object-fit:contain;border-radius:9px;background:var(--surface2);display:block;cursor:zoom-in}
+.thumbs{display:flex;gap:6px;flex-wrap:wrap}
+.thumbs button{padding:0;border:2px solid transparent;border-radius:6px;background:none;overflow:hidden}
+.thumbs button[aria-pressed="true"]{border-color:var(--accent)}
+.thumbs img{width:54px;height:42px;object-fit:cover;display:block}
+.ficha-data{min-width:0}
+.ficha-data h2{font-size:25px;margin-bottom:6px}
+.ficha-data .tag{margin-bottom:10px}
+.sheet-foot{display:flex;justify-content:space-between;gap:8px;padding:11px 14px;border-top:1px solid var(--line);background:var(--surface);flex-wrap:wrap}
+.zoom-wrap{max-width:1100px;margin:auto;position:relative}
+.zoom-wrap img{width:100%;max-height:88vh;object-fit:contain;display:block;border-radius:10px;background:var(--surface2)}
+.zoom-wrap .icon-btn{position:absolute;top:8px;right:8px;background:var(--surface)}
+/* ============ mix picker ============ */
+.mix-picker{display:flex;flex-direction:column;gap:10px;background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:12px}
+.mix-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.mix-row label{display:flex;flex-direction:column;gap:5px;font:500 10.5px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.mix-row input{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:650 17px var(--f-head);color:var(--ink)}
+.mix-row input:focus{border-color:var(--accent);outline:2px solid color-mix(in srgb,var(--accent) 25%,transparent);outline-offset:0}
+.mix-total{font:500 12px var(--f-mono);color:var(--muted)}
+.mix-total b{font-size:16px;color:var(--ok)}
+.mix-total.bad b{color:var(--bad)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.foot{margin-top:34px;padding-top:15px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+.foot b{color:var(--ink)}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="kicker">Petrografía Macroscópica · UdeC</div>
+      <h1>Test Final de Rocas</h1>
+      <div class="sub">Ígneas · Sedimentarias · Metamórficas &nbsp;·&nbsp; 10 muestras &nbsp;·&nbsp; nombre y componentes primero</div>
+    </div>
+    <button class="icon-btn" data-act="theme" title="Cambiar tema claro/oscuro" aria-label="Cambiar tema">◐</button>
+  </header>
+  <nav class="tabs" id="tabs" role="tablist"></nav>
+  <main id="main"></main>
+  <footer class="foot">
+    <b>Fuente:</b> datos de las tablas de ígneas, sedimentarias y metamórficas. Las imágenes de muestra no llevan el nombre impreso.
+    <span id="foot-count"></span>
+  </footer>
+</div>
+<div id="ov" class="overlay" hidden></div>
+
+<script>
+/* ============================================================
+   DATOS
+   ============================================================ */
+const ROCKS = [
+ {
+  "id": "ig-dunita",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Dunita",
+  "alias": [
+   "Dunita"
+  ],
+  "img": "fotos-final/ig-dunita-1.jpg",
+  "imgs": [
+   "fotos-final/ig-dunita-1.jpg"
+  ],
+  "subtipo": "Plutónico · Ultrabásica",
+  "estructura": "Fanerítica equigranular",
+  "origen": "Plutónico",
+  "clasificacion": "Ultrabásica",
+  "composicion": "Olivino 90–100 % · Piroxenos 0–10 % · Hornblenda 0–10 % · Accesorios: Magnetita, Ilmenita, Cromita, Espinela, Pirrotina",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Color verde",
+   "Alta presencia de olivino",
+   "Alto peso específico"
+  ],
+  "notas": [],
+  "gate": [
+   {
+    "label": "Olivino",
+    "keys": [
+     "olivino"
+    ]
+   }
+  ],
+  "gateMin": 1,
+  "gateMust": [
+   [
+    "olivino"
+   ]
+  ],
+  "check": {
+   "estructura": [
+    [
+     "faneritica"
+    ]
+   ],
+   "origen": [
+    [
+     "plutonico",
+     "intrusivo",
+     "plutonica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "ultrabasica",
+     "ultramafica"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-piroxenita",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Piroxenita",
+  "alias": [
+   "Piroxenita"
+  ],
+  "img": "fotos-final/ig-piroxenita-1.jpg",
+  "imgs": [
+   "fotos-final/ig-piroxenita-1.jpg"
+  ],
+  "subtipo": "Plutónico · Ultrabásica",
+  "estructura": "Fanerítica equigranular",
+  "origen": "Plutónico",
+  "clasificacion": "Ultrabásica",
+  "composicion": "Olivino 0–10 % · Piroxenos 90–100 % · Hornblenda 0–10 % · Accesorios: Magnetita, Ilmenita, Cromita, Espinela, Pirrotina",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Color negro",
+   "Leve magnetismo",
+   "Textura fanerítica"
+  ],
+  "notas": [],
+  "gate": [
+   {
+    "label": "Piroxenos",
+    "keys": [
+     "piroxeno"
+    ]
+   }
+  ],
+  "gateMin": 1,
+  "gateMust": [
+   [
+    "piroxeno"
+   ]
+  ],
+  "check": {
+   "estructura": [
+    [
+     "faneritica"
+    ]
+   ],
+   "origen": [
+    [
+     "plutonico",
+     "intrusivo",
+     "plutonica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "ultrabasica",
+     "ultramafica"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-gabro",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Gabro",
+  "alias": [
+   "Gabro"
+  ],
+  "img": "fotos-final/ig-gabro-1.jpg",
+  "imgs": [
+   "fotos-final/ig-gabro-1.jpg"
+  ],
+  "subtipo": "Plutónico · Básica",
+  "estructura": "Fanerítica equigranular",
+  "origen": "Plutónico",
+  "clasificacion": "Básica",
+  "composicion": "Cuarzo 0–5 % · Feldespato alcalino 0–10 % · Plagioclasa básica 85–100 % · Principales: Olivino, Piroxenos, Hornblenda, Biotita · Accesorios: Magnetita, Ilmenita, Pirrotina, Titanita",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Alto contenido de piroxenos",
+   "Alto contenido de plagioclasas básicas",
+   "Textura fanerítica"
+  ],
+  "notas": [],
+  "gate": [
+   {
+    "label": "Plagioclasa básica",
+    "keys": [
+     "plagioclasa"
+    ]
+   },
+   {
+    "label": "Olivino",
+    "keys": [
+     "olivino"
+    ]
+   },
+   {
+    "label": "Piroxenos",
+    "keys": [
+     "piroxeno"
+    ]
+   },
+   {
+    "label": "Hornblenda",
+    "keys": [
+     "hornblenda",
+     "anfibol"
+    ]
+   },
+   {
+    "label": "Biotita",
+    "keys": [
+     "biotita",
+     "mica"
+    ]
+   }
+  ],
+  "gateMin": 3,
+  "gateMust": [
+   [
+    "plagioclasa"
+   ]
+  ],
+  "check": {
+   "estructura": [
+    [
+     "faneritica"
+    ]
+   ],
+   "origen": [
+    [
+     "plutonico",
+     "intrusivo",
+     "plutonica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "basica",
+     "mafica"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-diorita",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Diorita",
+  "alias": [
+   "Diorita",
+   "Microdiorita"
+  ],
+  "img": "fotos-final/ig-diorita-1.jpg",
+  "imgs": [
+   "fotos-final/ig-diorita-1.jpg",
+   "fotos-final/ig-diorita-2.jpg"
+  ],
+  "subtipo": "Plutónico · Intermedia",
+  "estructura": "Fanerítica equigranular",
+  "origen": "Plutónico",
+  "clasificacion": "Intermedia",
+  "composicion": "Cuarzo 0–5 % · Feldespato alcalino 0–10 % · Plagioclasa intermedia 85–100 % · Principales: Piroxenos, Hornblenda, Biotita · Accesorios: Magnetita, Titanita, Apatito",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Presencia de micas",
+   "Alto contenido de plagioclasas intermedias",
+   "Color oscuro"
+  ],
+  "notas": [],
+  "gate": [
+   {
+    "label": "Plagioclasa intermedia",
+    "keys": [
+     "plagioclasa"
+    ]
+   },
+   {
+    "label": "Piroxenos",
+    "keys": [
+     "piroxeno"
+    ]
+   },
+   {
+    "label": "Hornblenda",
+    "keys": [
+     "hornblenda",
+     "anfibol"
+    ]
+   },
+   {
+    "label": "Biotita",
+    "keys": [
+     "biotita",
+     "mica"
+    ]
+   }
+  ],
+  "gateMin": 2,
+  "gateMust": [
+   [
+    "plagioclasa"
+   ]
+  ],
+  "check": {
+   "estructura": [
+    [
+     "faneritica"
+    ]
+   ],
+   "origen": [
+    [
+     "plutonico",
+     "intrusivo",
+     "plutonica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "intermedia"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-diorita-cuarcifera",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Diorita cuarcífera",
+  "alias": [
+   "Diorita cuarcífera"
+  ],
+  "img": "fotos-final/ig-diorita-cuarcifera-1.jpg",
+  "imgs": [
+   "fotos-final/ig-diorita-cuarcifera-1.jpg"
+  ],
+  "subtipo": "Plutónico · Intermedia",
+  "estructura": "Fanerítica equigranular",
+  "origen": "Plutónico",
+  "clasificacion": "Intermedia",
+  "composicion": "Cuarzo 5–20 % · Feldespato alcalino 0–10 % · Plagioclasa intermedia 80–90 % · Principales: Piroxenos, Hornblenda, Biotita · Accesorios: Magnetita, Titanita, Apatito",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Presencia de micas",
+   "Alto contenido de plagioclasas intermedias",
+   "Color oscuro"
+  ],
+  "notas": [],
+  "gate": [
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Plagioclasa intermedia",
+    "keys": [
+     "plagioclasa"
+    ]
+   },
+   {
+    "label": "Piroxenos",
+    "keys": [
+     "piroxeno"
+    ]
+   },
+   {
+    "label": "Hornblenda",
+    "keys": [
+     "hornblenda",
+     "anfibol"
+    ]
+   },
+   {
+    "label": "Biotita",
+    "keys": [
+     "biotita",
+     "mica"
+    ]
+   }
+  ],
+  "gateMin": 3,
+  "gateMust": [
+   [
+    "plagioclasa"
+   ]
+  ],
+  "check": {
+   "estructura": [
+    [
+     "faneritica"
+    ]
+   ],
+   "origen": [
+    [
+     "plutonico",
+     "intrusivo",
+     "plutonica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "intermedia"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-sienita",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Sienita",
+  "alias": [
+   "Sienita"
+  ],
+  "img": "fotos-final/ig-sienita-1.jpg",
+  "imgs": [
+   "fotos-final/ig-sienita-1.jpg"
+  ],
+  "subtipo": "Plutónico · Intermedia (Alcalina)",
+  "estructura": "Fanerítica inequigranular · Pertítica",
+  "origen": "Plutónico",
+  "clasificacion": "Intermedia (Alcalina)",
+  "composicion": "Cuarzo 0–5 % · Feldespato alcalino 65–90 % · Plagioclasa intermedia 10–35 % · Principales: Hornblenda, Biotita · Accesorios: Magnetita, Titanita, Apatito, Circón, Cuarzo",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Pertitas",
+   "Alto contenido de feldespato potásico",
+   "Bajo contenido de cuarzo"
+  ],
+  "notas": [],
+  "gate": [
+   {
+    "label": "Feldespato alcalino",
+    "keys": [
+     "feldespato",
+     "ortoclasa",
+     "feldespato potasico"
+    ]
+   },
+   {
+    "label": "Plagioclasa intermedia",
+    "keys": [
+     "plagioclasa"
+    ]
+   },
+   {
+    "label": "Hornblenda",
+    "keys": [
+     "hornblenda",
+     "anfibol"
+    ]
+   },
+   {
+    "label": "Biotita",
+    "keys": [
+     "biotita",
+     "mica"
+    ]
+   }
+  ],
+  "gateMin": 2,
+  "gateMust": [
+   [
+    "feldespato",
+    "ortoclasa",
+    "feldespato potasico"
+   ]
+  ],
+  "check": {
+   "estructura": [
+    [
+     "faneritica",
+     "pertitica"
+    ]
+   ],
+   "origen": [
+    [
+     "plutonico",
+     "intrusivo",
+     "plutonica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "intermedia",
+     "alcalina"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-monzonita",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Monzonita",
+  "alias": [
+   "Monzonita"
+  ],
+  "img": "fotos-final/ig-monzonita-1.jpg",
+  "imgs": [
+   "fotos-final/ig-monzonita-1.jpg"
+  ],
+  "subtipo": "Plutónico · Intermedia",
+  "estructura": "Fanerítica inequigranular · Granitoide",
+  "origen": "Plutónico",
+  "clasificacion": "Intermedia",
+  "composicion": "Cuarzo 0–5 % · Feldespato alcalino 35–60 % · Plagioclasa sódica 35–60 % · Principales: Hornblenda, Biotita, Muscovita · Accesorios: Magnetita, Apatito, Circón, Turmalina",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Plagioclasa con iridiscencia",
+   "Bajo contenido de cuarzo",
+   "Textura fanerítica"
+  ],
+  "notas": [],
+  "gate": [
+   {
+    "label": "Feldespato alcalino",
+    "keys": [
+     "feldespato",
+     "ortoclasa",
+     "feldespato potasico"
+    ]
+   },
+   {
+    "label": "Plagioclasa sódica",
+    "keys": [
+     "plagioclasa"
+    ]
+   },
+   {
+    "label": "Hornblenda",
+    "keys": [
+     "hornblenda",
+     "anfibol"
+    ]
+   },
+   {
+    "label": "Biotita",
+    "keys": [
+     "biotita",
+     "mica"
+    ]
+   },
+   {
+    "label": "Muscovita",
+    "keys": [
+     "muscovita",
+     "mica"
+    ]
+   }
+  ],
+  "gateMin": 3,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "faneritica",
+     "granitoide"
+    ]
+   ],
+   "origen": [
+    [
+     "plutonico",
+     "intrusivo",
+     "plutonica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "intermedia"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-monzonita-cuarcifera",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Monzonita cuarcífera",
+  "alias": [
+   "Monzonita cuarcífera"
+  ],
+  "img": "fotos-final/ig-monzonita-cuarcifera-1.jpg",
+  "imgs": [
+   "fotos-final/ig-monzonita-cuarcifera-1.jpg"
+  ],
+  "subtipo": "Plutónico · Ácida",
+  "estructura": "Fanerítica inequigranular · Granitoide",
+  "origen": "Plutónico",
+  "clasificacion": "Ácida",
+  "composicion": "Cuarzo 5–20 % · Feldespato alcalino 30–55 % · Plagioclasa sódica 35–60 % · Principales: Hornblenda, Biotita, Muscovita · Accesorios: Magnetita, Apatito, Circón, Turmalina",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Plagioclasa con iridiscencia",
+   "Bajo contenido de cuarzo",
+   "Textura fanerítica"
+  ],
+  "notas": [],
+  "gate": [
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Feldespato alcalino",
+    "keys": [
+     "feldespato",
+     "ortoclasa",
+     "feldespato potasico"
+    ]
+   },
+   {
+    "label": "Plagioclasa sódica",
+    "keys": [
+     "plagioclasa"
+    ]
+   },
+   {
+    "label": "Hornblenda",
+    "keys": [
+     "hornblenda",
+     "anfibol"
+    ]
+   },
+   {
+    "label": "Biotita",
+    "keys": [
+     "biotita",
+     "mica"
+    ]
+   },
+   {
+    "label": "Muscovita",
+    "keys": [
+     "muscovita",
+     "mica"
+    ]
+   }
+  ],
+  "gateMin": 3,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "faneritica",
+     "granitoide"
+    ]
+   ],
+   "origen": [
+    [
+     "plutonico",
+     "intrusivo",
+     "plutonica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "acida",
+     "felsica"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-tonalita",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Tonalita",
+  "alias": [
+   "Tonalita"
+  ],
+  "img": "fotos-final/ig-tonalita-1.jpg",
+  "imgs": [
+   "fotos-final/ig-tonalita-1.jpg",
+   "fotos-final/ig-tonalita-2.jpg"
+  ],
+  "subtipo": "Plutónico · Ácida",
+  "estructura": "Fanerítica inequigranular · Granitoide",
+  "origen": "Plutónico",
+  "clasificacion": "Ácida",
+  "composicion": "Cuarzo 20–60 % · Feldespato alcalino 0–5 % · Plagioclasa sódica 40–80 % · Principales: Hornblenda, Biotita, Piroxenos · Accesorios: Magnetita, Apatito, Esfeno",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Poco o nada de feldespato potásico",
+   "Similar contenido de plagioclasa y cuarzo",
+   "Textura fanerítica"
+  ],
+  "notas": [
+   "Los piroxenos son raros."
+  ],
+  "gate": [
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Plagioclasa sódica",
+    "keys": [
+     "plagioclasa"
+    ]
+   },
+   {
+    "label": "Hornblenda",
+    "keys": [
+     "hornblenda",
+     "anfibol"
+    ]
+   },
+   {
+    "label": "Biotita",
+    "keys": [
+     "biotita",
+     "mica"
+    ]
+   },
+   {
+    "label": "Piroxenos",
+    "keys": [
+     "piroxeno"
+    ]
+   }
+  ],
+  "gateMin": 3,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "faneritica",
+     "granitoide"
+    ]
+   ],
+   "origen": [
+    [
+     "plutonico",
+     "intrusivo",
+     "plutonica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "acida",
+     "felsica"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-granodiorita",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Granodiorita",
+  "alias": [
+   "Granodiorita"
+  ],
+  "img": "fotos-final/ig-granodiorita-1.jpg",
+  "imgs": [
+   "fotos-final/ig-granodiorita-1.jpg",
+   "fotos-final/ig-granodiorita-2.jpg",
+   "fotos-final/ig-granodiorita-3.jpg"
+  ],
+  "subtipo": "Plutónico · Ácida",
+  "estructura": "Fanerítica equigranular · Granitoide",
+  "origen": "Plutónico",
+  "clasificacion": "Ácida",
+  "composicion": "Cuarzo 20–60 % · Feldespato alcalino 5–35 % · Plagioclasa sódica 35–70 % · Principales: Hornblenda, Biotita · Accesorios: Magnetita, Apatito, Circón",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Bajo contenido de feldespato potásico",
+   "Alto contenido de plagioclasa",
+   "Textura fanerítica"
+  ],
+  "notas": [],
+  "gate": [
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Feldespato alcalino",
+    "keys": [
+     "feldespato",
+     "ortoclasa",
+     "feldespato potasico"
+    ]
+   },
+   {
+    "label": "Plagioclasa sódica",
+    "keys": [
+     "plagioclasa"
+    ]
+   },
+   {
+    "label": "Hornblenda",
+    "keys": [
+     "hornblenda",
+     "anfibol"
+    ]
+   },
+   {
+    "label": "Biotita",
+    "keys": [
+     "biotita",
+     "mica"
+    ]
+   }
+  ],
+  "gateMin": 3,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "faneritica",
+     "granitoide"
+    ]
+   ],
+   "origen": [
+    [
+     "plutonico",
+     "intrusivo",
+     "plutonica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "acida",
+     "felsica"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-granito",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Granito",
+  "alias": [
+   "Granito"
+  ],
+  "img": "fotos-final/ig-granito-1.jpg",
+  "imgs": [
+   "fotos-final/ig-granito-1.jpg",
+   "fotos-final/ig-granito-2.jpg"
+  ],
+  "subtipo": "Plutónico · Ácida",
+  "estructura": "Fanerítica equigranular · Granitoide",
+  "origen": "Plutónico",
+  "clasificacion": "Ácida",
+  "composicion": "Cuarzo 20–60 % · Feldespato alcalino 20–70 % · Plagioclasa sódica 5–50 % · Principales: Hornblenda, Biotita, Muscovita · Accesorios: Magnetita, Apatito, Circón, Turmalina",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Equidad de minerales formadores",
+   "Leve color rosado",
+   "Textura fanerítica equigranular"
+  ],
+  "notas": [],
+  "gate": [
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Feldespato alcalino",
+    "keys": [
+     "feldespato",
+     "ortoclasa",
+     "feldespato potasico"
+    ]
+   },
+   {
+    "label": "Plagioclasa sódica",
+    "keys": [
+     "plagioclasa"
+    ]
+   },
+   {
+    "label": "Hornblenda",
+    "keys": [
+     "hornblenda",
+     "anfibol"
+    ]
+   },
+   {
+    "label": "Biotita",
+    "keys": [
+     "biotita",
+     "mica"
+    ]
+   },
+   {
+    "label": "Muscovita",
+    "keys": [
+     "muscovita",
+     "mica"
+    ]
+   }
+  ],
+  "gateMin": 3,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "faneritica",
+     "granitoide"
+    ]
+   ],
+   "origen": [
+    [
+     "plutonico",
+     "intrusivo",
+     "plutonica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "acida",
+     "felsica"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-granito-alcalino",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Granito alcalino",
+  "alias": [
+   "Granito alcalino"
+  ],
+  "img": "fotos-final/ig-granito-alcalino-1.jpg",
+  "imgs": [
+   "fotos-final/ig-granito-alcalino-1.jpg",
+   "fotos-final/ig-granito-alcalino-2.jpg"
+  ],
+  "subtipo": "Plutónico · Ácida (Alcalina)",
+  "estructura": "Fanerítica inequigranular · Granitoide",
+  "origen": "Plutónico",
+  "clasificacion": "Ácida (Alcalina)",
+  "composicion": "Cuarzo 20–60 % · Feldespato alcalino 40–80 % · Plagioclasa sódica 0–5 % · Principales: Hornblenda, Biotita, Muscovita · Accesorios: Magnetita, Apatito, Circón, Turmalina",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Alto contenido de feldespato potásico",
+   "Color rosado",
+   "Textura fanerítica"
+  ],
+  "notas": [],
+  "gate": [
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Feldespato alcalino",
+    "keys": [
+     "feldespato",
+     "ortoclasa",
+     "feldespato potasico"
+    ]
+   },
+   {
+    "label": "Hornblenda",
+    "keys": [
+     "hornblenda",
+     "anfibol"
+    ]
+   },
+   {
+    "label": "Biotita",
+    "keys": [
+     "biotita",
+     "mica"
+    ]
+   },
+   {
+    "label": "Muscovita",
+    "keys": [
+     "muscovita",
+     "mica"
+    ]
+   }
+  ],
+  "gateMin": 3,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "faneritica",
+     "granitoide"
+    ]
+   ],
+   "origen": [
+    [
+     "plutonico",
+     "intrusivo",
+     "plutonica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "acida",
+     "felsica",
+     "alcalina"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-granito-grafico",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Granito gráfico",
+  "alias": [
+   "Granito gráfico"
+  ],
+  "img": "fotos-final/ig-granito-grafico-1.jpg",
+  "imgs": [
+   "fotos-final/ig-granito-grafico-1.jpg"
+  ],
+  "subtipo": "Plutónico · Ácida",
+  "estructura": "Gráfica",
+  "origen": "Plutónico",
+  "clasificacion": "Ácida",
+  "composicion": "Cuarzo 20–60 % · Feldespato alcalino 20–70 % · Plagioclasa sódica 5–50 % · Principales: Biotita, Muscovita · Accesorios: Berilo, Granate, Turmalina",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Textura gráfica",
+   "Cristales de grano grueso",
+   "Alta presencia de micas"
+  ],
+  "notas": [
+   "En la lámina comparte ficha con la pegmatita."
+  ],
+  "gate": [
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Feldespato alcalino",
+    "keys": [
+     "feldespato",
+     "ortoclasa",
+     "feldespato potasico"
+    ]
+   },
+   {
+    "label": "Plagioclasa sódica",
+    "keys": [
+     "plagioclasa"
+    ]
+   },
+   {
+    "label": "Biotita",
+    "keys": [
+     "biotita",
+     "mica"
+    ]
+   },
+   {
+    "label": "Muscovita",
+    "keys": [
+     "muscovita",
+     "mica"
+    ]
+   }
+  ],
+  "gateMin": 3,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "grafica"
+    ]
+   ],
+   "origen": [
+    [
+     "plutonico",
+     "intrusivo",
+     "plutonica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "acida",
+     "felsica"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-pegmatita",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Pegmatita",
+  "alias": [
+   "Pegmatita"
+  ],
+  "img": "fotos-final/ig-pegmatita-1.jpg",
+  "imgs": [
+   "fotos-final/ig-pegmatita-1.jpg"
+  ],
+  "subtipo": "Plutónico · Ácida",
+  "estructura": "Pegmatítica · Gráfica",
+  "origen": "Plutónico",
+  "clasificacion": "Ácida",
+  "composicion": "Cuarzo 20–60 % · Feldespato alcalino 20–70 % · Plagioclasa sódica 5–50 % · Principales: Biotita, Muscovita · Accesorios: Berilo, Granate, Turmalina",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Cristales de grano grueso",
+   "Alta presencia de micas",
+   "Textura pegmatítica"
+  ],
+  "notas": [
+   "En la lámina comparte ficha con el granito gráfico."
+  ],
+  "gate": [
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Feldespato alcalino",
+    "keys": [
+     "feldespato",
+     "ortoclasa",
+     "feldespato potasico"
+    ]
+   },
+   {
+    "label": "Plagioclasa sódica",
+    "keys": [
+     "plagioclasa"
+    ]
+   },
+   {
+    "label": "Biotita",
+    "keys": [
+     "biotita",
+     "mica"
+    ]
+   },
+   {
+    "label": "Muscovita",
+    "keys": [
+     "muscovita",
+     "mica"
+    ]
+   }
+  ],
+  "gateMin": 3,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "pegmatitica",
+     "grafica"
+    ]
+   ],
+   "origen": [
+    [
+     "plutonico",
+     "intrusivo",
+     "plutonica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "acida",
+     "felsica"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-aplita",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Aplita",
+  "alias": [
+   "Aplita",
+   "Granodiorita-aplita"
+  ],
+  "img": "fotos-final/ig-aplita-1.jpg",
+  "imgs": [
+   "fotos-final/ig-aplita-1.jpg"
+  ],
+  "subtipo": "Hipabisal · Ácida",
+  "estructura": "Fanerítica microequigranular",
+  "origen": "Hipabisal",
+  "clasificacion": "Ácida",
+  "composicion": "Cuarzo 30 % · Feldespato alcalino 40 % · Plagioclasa sódica 30 % · Principales: Hornblenda, Biotita, Muscovita · Accesorios: Magnetita, Apatito, Circón, Turmalina",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Textura fanerítica",
+   "Grano fino",
+   "Color rosado"
+  ],
+  "notas": [],
+  "gate": [
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Feldespato alcalino",
+    "keys": [
+     "feldespato",
+     "ortoclasa",
+     "feldespato potasico"
+    ]
+   },
+   {
+    "label": "Plagioclasa sódica",
+    "keys": [
+     "plagioclasa"
+    ]
+   },
+   {
+    "label": "Hornblenda",
+    "keys": [
+     "hornblenda",
+     "anfibol"
+    ]
+   },
+   {
+    "label": "Biotita",
+    "keys": [
+     "biotita",
+     "mica"
+    ]
+   },
+   {
+    "label": "Muscovita",
+    "keys": [
+     "muscovita",
+     "mica"
+    ]
+   }
+  ],
+  "gateMin": 3,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "faneritica"
+    ]
+   ],
+   "origen": [
+    [
+     "hipabisal",
+     "subvolcanico"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "acida",
+     "felsica"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-basalto",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Basalto",
+  "alias": [
+   "Basalto"
+  ],
+  "img": "fotos-final/ig-basalto-1.jpg",
+  "imgs": [
+   "fotos-final/ig-basalto-1.jpg"
+  ],
+  "subtipo": "Efusivo · Básica",
+  "estructura": "Afanítica · Porfírica · Vesicular",
+  "origen": "Efusivo",
+  "clasificacion": "Básica",
+  "composicion": "Cuarzo 0–5 % · Feldespato alcalino 0–10 % · Plagioclasa básica 85–100 % · Principales: Olivino, Piroxenos, Hornblenda, Biotita · Accesorios: Magnetita, Ilmenita, Pirrotina, Titanita",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Textura afanítica",
+   "Color negro",
+   "Porosidades",
+   "Presencia de vidrio volcánico",
+   "Alto peso específico"
+  ],
+  "notas": [],
+  "gate": [
+   {
+    "label": "Plagioclasa básica",
+    "keys": [
+     "plagioclasa"
+    ]
+   },
+   {
+    "label": "Olivino",
+    "keys": [
+     "olivino"
+    ]
+   },
+   {
+    "label": "Piroxenos",
+    "keys": [
+     "piroxeno"
+    ]
+   },
+   {
+    "label": "Hornblenda",
+    "keys": [
+     "hornblenda",
+     "anfibol"
+    ]
+   },
+   {
+    "label": "Biotita",
+    "keys": [
+     "biotita",
+     "mica"
+    ]
+   }
+  ],
+  "gateMin": 3,
+  "gateMust": [
+   [
+    "plagioclasa"
+   ]
+  ],
+  "check": {
+   "estructura": [
+    [
+     "afanitica",
+     "porfirica",
+     "vesicular"
+    ]
+   ],
+   "origen": [
+    [
+     "efusivo",
+     "volcanico",
+     "extrusivo",
+     "volcanica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "basica",
+     "mafica"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-andesita",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Andesita",
+  "alias": [
+   "Andesita"
+  ],
+  "img": "fotos-final/ig-andesita-1.jpg",
+  "imgs": [
+   "fotos-final/ig-andesita-1.jpg"
+  ],
+  "subtipo": "Efusivo · Intermedia",
+  "estructura": "Porfírica · Vesicular · Amigdaloide",
+  "origen": "Efusivo",
+  "clasificacion": "Intermedia",
+  "composicion": "Cuarzo 5–20 % · Feldespato alcalino 0–10 % · Plagioclasa intermedia 80–90 % · Principales: Piroxenos, Hornblenda, Biotita · Accesorios: Magnetita, Titanita, Apatito, Cuarzo, Feldespato alcalino",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Textura porfídica",
+   "Fenocristales de plagioclasa",
+   "Color pardo",
+   "Bajo contenido de feldespato potásico"
+  ],
+  "notas": [],
+  "gate": [
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Plagioclasa intermedia",
+    "keys": [
+     "plagioclasa"
+    ]
+   },
+   {
+    "label": "Piroxenos",
+    "keys": [
+     "piroxeno"
+    ]
+   },
+   {
+    "label": "Hornblenda",
+    "keys": [
+     "hornblenda",
+     "anfibol"
+    ]
+   },
+   {
+    "label": "Biotita",
+    "keys": [
+     "biotita",
+     "mica"
+    ]
+   }
+  ],
+  "gateMin": 3,
+  "gateMust": [
+   [
+    "plagioclasa"
+   ]
+  ],
+  "check": {
+   "estructura": [
+    [
+     "porfirica",
+     "vesicular",
+     "amigdaloide"
+    ]
+   ],
+   "origen": [
+    [
+     "efusivo",
+     "volcanico",
+     "extrusivo",
+     "volcanica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "intermedia"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-dacita",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Dacita",
+  "alias": [
+   "Dacita"
+  ],
+  "img": "fotos-final/ig-dacita-1.jpg",
+  "imgs": [
+   "fotos-final/ig-dacita-1.jpg"
+  ],
+  "subtipo": "Efusivo · Ácida",
+  "estructura": "Porfírica · Afanítica",
+  "origen": "Efusivo",
+  "clasificacion": "Ácida",
+  "composicion": "Cuarzo 20–60 % · Feldespato alcalino 5–30 % · Plagioclasa sódica 35–70 % · Principales: Hornblenda, Biotita · Accesorios: Magnetita, Apatito, Circón",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Color gris a gris claro",
+   "Presencia de ojos de cuarzo",
+   "Textura afanítica"
+  ],
+  "notas": [],
+  "gate": [
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Feldespato alcalino",
+    "keys": [
+     "feldespato",
+     "ortoclasa",
+     "feldespato potasico"
+    ]
+   },
+   {
+    "label": "Plagioclasa sódica",
+    "keys": [
+     "plagioclasa"
+    ]
+   },
+   {
+    "label": "Hornblenda",
+    "keys": [
+     "hornblenda",
+     "anfibol"
+    ]
+   },
+   {
+    "label": "Biotita",
+    "keys": [
+     "biotita",
+     "mica"
+    ]
+   }
+  ],
+  "gateMin": 3,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "porfirica",
+     "afanitica"
+    ]
+   ],
+   "origen": [
+    [
+     "efusivo",
+     "volcanico",
+     "extrusivo",
+     "volcanica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "acida",
+     "felsica"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-riolita",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Riolita",
+  "alias": [
+   "Riolita"
+  ],
+  "img": "fotos-final/ig-riolita-1.jpg",
+  "imgs": [
+   "fotos-final/ig-riolita-1.jpg",
+   "fotos-final/ig-riolita-2.jpg"
+  ],
+  "subtipo": "Efusivo · Ácida",
+  "estructura": "Afanítica · Porfírica",
+  "origen": "Efusivo",
+  "clasificacion": "Ácida",
+  "composicion": "Cuarzo 20–60 % · Feldespato alcalino 20–70 % · Plagioclasa sódica 5–50 % · Principales: Hornblenda, Biotita, Muscovita · Accesorios: Magnetita, Apatito, Circón, Turmalina",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Textura afanítica o porfídica",
+   "Marcas de flujo",
+   "Fenocristales de cuarzo",
+   "Color rosado"
+  ],
+  "notas": [],
+  "gate": [
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Feldespato alcalino",
+    "keys": [
+     "feldespato",
+     "ortoclasa",
+     "feldespato potasico"
+    ]
+   },
+   {
+    "label": "Plagioclasa sódica",
+    "keys": [
+     "plagioclasa"
+    ]
+   },
+   {
+    "label": "Hornblenda",
+    "keys": [
+     "hornblenda",
+     "anfibol"
+    ]
+   },
+   {
+    "label": "Biotita",
+    "keys": [
+     "biotita",
+     "mica"
+    ]
+   },
+   {
+    "label": "Muscovita",
+    "keys": [
+     "muscovita",
+     "mica"
+    ]
+   }
+  ],
+  "gateMin": 3,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "afanitica",
+     "porfirica"
+    ]
+   ],
+   "origen": [
+    [
+     "efusivo",
+     "volcanico",
+     "extrusivo",
+     "volcanica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "acida",
+     "felsica"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-escoria",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Escoria",
+  "alias": [
+   "Escoria"
+  ],
+  "img": "fotos-final/ig-escoria-1.jpg",
+  "imgs": [
+   "fotos-final/ig-escoria-1.jpg"
+  ],
+  "subtipo": "Volcánico-piroclástico · Básica",
+  "estructura": "Vítrea · Porosa · Vesicular",
+  "origen": "Volcánico-piroclástico",
+  "clasificacion": "Básica",
+  "composicion": "Lava basáltica · Vidrio · Accesorios: Magnetita, Olivino, Hornblenda, Biotita",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Ligera",
+   "Porosa",
+   "Textura vesicular"
+  ],
+  "notas": [],
+  "gate": [
+   {
+    "label": "Lava basáltica",
+    "keys": [
+     "lava",
+     "basalto",
+     "vidrio"
+    ]
+   },
+   {
+    "label": "Vidrio",
+    "keys": [
+     "vidrio"
+    ]
+   }
+  ],
+  "gateMin": 2,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "vitrea",
+     "porosa",
+     "vesicular"
+    ]
+   ],
+   "origen": [
+    [
+     "piroclastico",
+     "volcaniclastico",
+     "volcanico"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "basica",
+     "mafica"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-toba",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Toba",
+  "alias": [
+   "Toba",
+   "Toba clástica",
+   "Toba vítrea",
+   "Toba lítica",
+   "Toba cristalina"
+  ],
+  "img": "fotos-final/ig-toba-1.jpg",
+  "imgs": [
+   "fotos-final/ig-toba-1.jpg",
+   "fotos-final/ig-toba-2.jpg"
+  ],
+  "subtipo": "Volcánico-piroclástico · Ácida",
+  "estructura": "Fragmental · Vítrea · Clástica",
+  "origen": "Volcánico-piroclástico",
+  "clasificacion": "Ácida",
+  "composicion": "Vidrio volcánico · Líticos · Cristales · Accesorios: Ceniza, Polvo, Arena",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Ligera",
+   "Porosa",
+   "Textura vítrea o clástica"
+  ],
+  "notas": [
+   "Líticos de andesita, basalto y pómez."
+  ],
+  "gate": [
+   {
+    "label": "Vidrio volcánico",
+    "keys": [
+     "vidrio"
+    ]
+   },
+   {
+    "label": "Líticos",
+    "keys": [
+     "litico",
+     "clasto"
+    ]
+   },
+   {
+    "label": "Cristales",
+    "keys": [
+     "cristal"
+    ]
+   }
+  ],
+  "gateMin": 2,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "fragmental",
+     "vitrea",
+     "clastica"
+    ]
+   ],
+   "origen": [
+    [
+     "piroclastico",
+     "volcaniclastico",
+     "volcanico"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "acida",
+     "felsica"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-pomez",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Pómez",
+  "alias": [
+   "Pómez",
+   "Piedra pómez"
+  ],
+  "img": "fotos-final/ig-pomez-1.jpg",
+  "imgs": [
+   "fotos-final/ig-pomez-1.jpg"
+  ],
+  "subtipo": "Volcánico-piroclástico · Ácida",
+  "estructura": "Vítrea · Vesicular · Pumicítica · Porosa",
+  "origen": "Volcánico-piroclástico",
+  "clasificacion": "Ácida",
+  "composicion": "Lava silícea · Vidrio volcánico · Accesorios: Cuarzo, Nefelina, Sanidina, Ceniza, Lapilli",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Ligera",
+   "Porosa",
+   "Textura vesicular",
+   "Color claro"
+  ],
+  "notas": [],
+  "gate": [
+   {
+    "label": "Lava silícea",
+    "keys": [
+     "lava",
+     "silice",
+     "vidrio"
+    ]
+   },
+   {
+    "label": "Vidrio volcánico",
+    "keys": [
+     "vidrio"
+    ]
+   }
+  ],
+  "gateMin": 2,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "vitrea",
+     "vesicular",
+     "pumicitica",
+     "porosa"
+    ]
+   ],
+   "origen": [
+    [
+     "piroclastico",
+     "volcaniclastico",
+     "volcanico"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "acida",
+     "felsica"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-brecha-volcanica",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Brecha volcánica",
+  "alias": [
+   "Brecha volcánica"
+  ],
+  "img": "fotos-final/ig-brecha-volcanica-1.jpg",
+  "imgs": [
+   "fotos-final/ig-brecha-volcanica-1.jpg"
+  ],
+  "subtipo": "Volcánico-piroclástico · Ácida",
+  "estructura": "Clástica · Porosa · Amigdaloide",
+  "origen": "Volcánico-piroclástico",
+  "clasificacion": "Ácida",
+  "composicion": "Clastos diversos · Bloques · Lapilli · Accesorios: Bomba volcánica, Nefelina, Apatito, Leucita",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Clastos angulosos",
+   "Textura clástica",
+   "Porosidad"
+  ],
+  "notas": [],
+  "gate": [
+   {
+    "label": "Clastos diversos",
+    "keys": [
+     "clasto"
+    ]
+   },
+   {
+    "label": "Bloques",
+    "keys": [
+     "bloque",
+     "clasto"
+    ]
+   },
+   {
+    "label": "Lapilli",
+    "keys": [
+     "lapilli"
+    ]
+   }
+  ],
+  "gateMin": 2,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "clastica",
+     "porosa",
+     "amigdaloide"
+    ]
+   ],
+   "origen": [
+    [
+     "piroclastico",
+     "volcaniclastico",
+     "volcanico"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "acida",
+     "felsica"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-aglomerado",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Aglomerado",
+  "alias": [
+   "Aglomerado",
+   "Aglomerado volcánico"
+  ],
+  "img": "fotos-final/ig-aglomerado-1.jpg",
+  "imgs": [
+   "fotos-final/ig-aglomerado-1.jpg"
+  ],
+  "subtipo": "Volcánico-piroclástico · Ácida",
+  "estructura": "Clástica · Porosa",
+  "origen": "Volcánico-piroclástico",
+  "clasificacion": "Ácida",
+  "composicion": "Clastos diversos · Matriz volcánica · Accesorios: Bomba volcánica, Clastos diversos",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Clastos redondeados",
+   "Textura clástica",
+   "Porosidad"
+  ],
+  "notas": [
+   "Clastos de andesita, basalto y dacita."
+  ],
+  "gate": [
+   {
+    "label": "Clastos diversos",
+    "keys": [
+     "clasto"
+    ]
+   },
+   {
+    "label": "Matriz volcánica",
+    "keys": [
+     "matriz"
+    ]
+   }
+  ],
+  "gateMin": 2,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "clastica",
+     "porosa"
+    ]
+   ],
+   "origen": [
+    [
+     "piroclastico",
+     "volcaniclastico",
+     "volcanico"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "acida",
+     "felsica"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-obsidiana",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Obsidiana",
+  "alias": [
+   "Obsidiana",
+   "Perlita",
+   "Obsidiana perlita"
+  ],
+  "img": "fotos-final/ig-obsidiana-1.jpg",
+  "imgs": [
+   "fotos-final/ig-obsidiana-1.jpg",
+   "fotos-final/ig-obsidiana-2.jpg"
+  ],
+  "subtipo": "Volcánico-piroclástico · Ácida",
+  "estructura": "Vítrea",
+  "origen": "Volcánico-piroclástico",
+  "clasificacion": "Ácida",
+  "composicion": "Vidrio volcánico 100 % · Accesorios: Zeolitas, Montmorillonita, Cristal de roca, Vidrio volcánico",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Fractura concoidea",
+   "Textura vítrea",
+   "Color oscuro"
+  ],
+  "notas": [
+   "La perlita es la variante de color claro."
+  ],
+  "gate": [
+   {
+    "label": "Vidrio volcánico",
+    "keys": [
+     "vidrio"
+    ]
+   }
+  ],
+  "gateMin": 1,
+  "gateMust": [
+   [
+    "vidrio"
+   ]
+  ],
+  "check": {
+   "estructura": [
+    [
+     "vitrea"
+    ]
+   ],
+   "origen": [
+    [
+     "piroclastico",
+     "volcaniclastico",
+     "volcanico"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "acida",
+     "felsica"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "ig-brecha-hidrotermal",
+  "clase": "Ígnea",
+  "claseKey": "ig",
+  "nombre": "Brecha hidrotermal",
+  "alias": [
+   "Brecha hidrotermal"
+  ],
+  "img": "fotos-final/ig-brecha-hidrotermal-1.jpg",
+  "imgs": [
+   "fotos-final/ig-brecha-hidrotermal-1.jpg"
+  ],
+  "subtipo": "Hidrotermal · Ácida",
+  "estructura": "Clástica · Brechosa",
+  "origen": "Hidrotermal",
+  "clasificacion": "Ácida",
+  "composicion": "Diversos · Lapilli · Bloques · Accesorios: Bomba volcánica, Sulfuros",
+  "analogo": "No aplica",
+  "diagnostico": [
+   "Textura brechosa",
+   "Alto contenido de sulfuros y turmalina",
+   "Clastos angulosos"
+  ],
+  "notas": [],
+  "gate": [
+   {
+    "label": "Diversos",
+    "keys": [
+     "diverso",
+     "clasto",
+     "mineral"
+    ]
+   },
+   {
+    "label": "Lapilli",
+    "keys": [
+     "lapilli"
+    ]
+   },
+   {
+    "label": "Bloques",
+    "keys": [
+     "bloque",
+     "clasto"
+    ]
+   }
+  ],
+  "gateMin": 2,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "clastica",
+     "brechosa"
+    ]
+   ],
+   "origen": [
+    [
+     "hidrotermal"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "acida",
+     "felsica"
+    ]
+   ],
+   "analogo": [
+    [
+     "no aplica",
+     "no corresponde",
+     "ninguno",
+     "ninguna",
+     "sin analogo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "sed-fangolita",
+  "clase": "Sedimentaria",
+  "claseKey": "sed",
+  "nombre": "Fangolita",
+  "alias": [
+   "Fangolita",
+   "Fango"
+  ],
+  "img": "fotos-final/sed-q_fangolita.jpg",
+  "imgs": [
+   "fotos-final/sed-q_fangolita.jpg"
+  ],
+  "subtipo": "Detrítica · Clástica",
+  "estructura": "Clástica / Pelita",
+  "origen": "Mecánico",
+  "clasificacion": "Detrítica",
+  "composicion": "Minerales arcillosos, Qz, carbonatos, clorita, minerales de Fe, Py",
+  "analogo": "Limo, Arcilla, Lodo (limo + arcilla)",
+  "diagnostico": [
+   "Grano muy fino: no se siente al tacto",
+   "Se pega a la lengua o al dedo mojado",
+   "Colores variados: el color no sirve, se reconoce por el tamaño de grano",
+   "Textura pelítica"
+  ],
+  "notas": [
+   "Fango = lengua pegajosa. Si es fina, lisa y NO se abre en hojas, es fangolita."
+  ],
+  "truco": "Fango = lengua pegajosa. Si es fina, lisa y NO se abre en hojas, es fangolita.",
+  "gate": [
+   {
+    "label": "Arcillas",
+    "keys": [
+     "arcilla",
+     "arcilloso"
+    ]
+   },
+   {
+    "label": "Limo",
+    "keys": [
+     "limo"
+    ]
+   }
+  ],
+  "gateMin": 1,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "clastica",
+     "pelita"
+    ]
+   ],
+   "origen": [
+    [
+     "mecanico",
+     "mecanica",
+     "detritico",
+     "detritica",
+     "transporte",
+     "sedimentacion"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "detritica"
+    ]
+   ],
+   "analogo": [
+    [
+     "limo"
+    ],
+    [
+     "arcilla",
+     "arcil"
+    ],
+    [
+     "lodo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "sed-lutita",
+  "clase": "Sedimentaria",
+  "claseKey": "sed",
+  "nombre": "Lutita",
+  "alias": [
+   "Lutita",
+   "lutitas"
+  ],
+  "img": "fotos-final/sed-q_lutita.jpg",
+  "imgs": [
+   "fotos-final/sed-q_lutita.jpg"
+  ],
+  "subtipo": "Detrítica · Clástica",
+  "estructura": "Clástica / Pelita",
+  "origen": "Mecánico",
+  "clasificacion": "Detrítica",
+  "composicion": "Minerales arcillosos, Qz afanítico, ópalo, calcedonia, carbonatos, clorita, minerales de Fe, Py",
+  "analogo": "Limo, Arcilla, Lodo (limo + arcilla)",
+  "diagnostico": [
+   "Grano fino, no se siente al tacto",
+   "Fisible: se rompe en capas o láminas",
+   "Principalmente negra (por materia orgánica), aunque hay otros colores",
+   "Más compacta que la fangolita",
+   "Puede contener fósiles"
+  ],
+  "notas": [
+   "Lutita = láminas. Se abre como libro y suele ser negra por materia orgánica."
+  ],
+  "truco": "Lutita = láminas. Se abre como libro y suele ser negra por materia orgánica.",
+  "gate": [
+   {
+    "label": "Arcillas",
+    "keys": [
+     "arcilla",
+     "arcilloso"
+    ]
+   },
+   {
+    "label": "Limo",
+    "keys": [
+     "limo"
+    ]
+   }
+  ],
+  "gateMin": 1,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "clastica",
+     "pelita"
+    ]
+   ],
+   "origen": [
+    [
+     "mecanico",
+     "mecanica",
+     "detritico",
+     "detritica",
+     "transporte",
+     "sedimentacion"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "detritica"
+    ]
+   ],
+   "analogo": [
+    [
+     "limo"
+    ],
+    [
+     "arcilla",
+     "arcil"
+    ],
+    [
+     "lodo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "sed-arenisca",
+  "clase": "Sedimentaria",
+  "claseKey": "sed",
+  "nombre": "Arenisca",
+  "alias": [
+   "Arenisca",
+   "areniscas"
+  ],
+  "img": "fotos-final/sed-q_arenisca_1.jpg",
+  "imgs": [
+   "fotos-final/sed-q_arenisca_1.jpg"
+  ],
+  "subtipo": "Detrítica · Clástica",
+  "estructura": "Clástica / Psamita",
+  "origen": "Mecánico",
+  "clasificacion": "Detrítica",
+  "composicion": "Qz, feldespato, líticos, máficos",
+  "analogo": "Arena, Granitoides y otras rocas fuente (aportan Qz y feldespato), Rocas volcánicas y metamórficas (aportan líticos)",
+  "diagnostico": [
+   "Porosa, buena selección, suele ser ligera (depende de la composición)",
+   "El grano se siente al tacto",
+   "Con lupa se aprecian los granos y la textura clástica",
+   "Buena selección: clastos de tamaño similar",
+   "Arcosas suelen ser más claras; las litarenitas, más oscuras"
+  ],
+  "notas": [
+   "Arenisca = granos al tacto (como lija fina) y todos del mismo tamaño."
+  ],
+  "truco": "Arenisca = granos al tacto (como lija fina) y todos del mismo tamaño.",
+  "gate": [
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Feldespato",
+    "keys": [
+     "feldespato"
+    ]
+   },
+   {
+    "label": "Líticos",
+    "keys": [
+     "litico",
+     "clasto"
+    ]
+   }
+  ],
+  "gateMin": 2,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "clastica",
+     "psamita"
+    ]
+   ],
+   "origen": [
+    [
+     "mecanico",
+     "mecanica",
+     "detritico",
+     "detritica",
+     "transporte",
+     "sedimentacion"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "detritica"
+    ]
+   ],
+   "analogo": [
+    [
+     "arena"
+    ],
+    [
+     "granitoides",
+     "grani"
+    ],
+    [
+     "volcanicas",
+     "volca"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "sed-conglomerado",
+  "clase": "Sedimentaria",
+  "claseKey": "sed",
+  "nombre": "Conglomerado",
+  "alias": [
+   "Conglomerado"
+  ],
+  "img": "fotos-final/sed-q_conglomerado.jpg",
+  "imgs": [
+   "fotos-final/sed-q_conglomerado.jpg"
+  ],
+  "subtipo": "Detrítica · Clástica",
+  "estructura": "Clástica / Psefita",
+  "origen": "Mecánico",
+  "clasificacion": "Detrítica",
+  "composicion": "Uno o varios elementos mezclados en una matriz",
+  "analogo": "Ripio, Grava, Gravilla fina",
+  "diagnostico": [
+   "Predominan clastos > 2 mm",
+   "Clastos redondeados en su mayoría",
+   "Mala selección y polimíctico (clastos de distintas composiciones)",
+   "Si la matriz es calcárea efervesce con HCl, pero no siempre la tiene"
+  ],
+  "notas": [
+   "Conglomerado = clastos Redondeados (rodaron por un río). Brecha = clastos con Bordes filosos."
+  ],
+  "truco": "Conglomerado = clastos Redondeados (rodaron por un río). Brecha = clastos con Bordes filosos.",
+  "gate": [
+   {
+    "label": "Clastos",
+    "keys": [
+     "clasto"
+    ]
+   },
+   {
+    "label": "Grava / ripio",
+    "keys": [
+     "grava",
+     "ripio"
+    ]
+   },
+   {
+    "label": "Matriz",
+    "keys": [
+     "matriz"
+    ]
+   }
+  ],
+  "gateMin": 1,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "clastica",
+     "psefita"
+    ]
+   ],
+   "origen": [
+    [
+     "mecanico",
+     "mecanica",
+     "detritico",
+     "detritica",
+     "transporte",
+     "sedimentacion"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "detritica"
+    ]
+   ],
+   "analogo": [
+    [
+     "ripio"
+    ],
+    [
+     "grava"
+    ],
+    [
+     "gravilla",
+     "gravi"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "sed-brecha",
+  "clase": "Sedimentaria",
+  "claseKey": "sed",
+  "nombre": "Brecha sedimentaria",
+  "alias": [
+   "Brecha sedimentaria",
+   "Brecha"
+  ],
+  "img": "fotos-final/sed-q_brecha.jpg",
+  "imgs": [
+   "fotos-final/sed-q_brecha.jpg"
+  ],
+  "subtipo": "Detrítica · Clástica",
+  "estructura": "Clástica / Psefita",
+  "origen": "Mecánico",
+  "clasificacion": "Detrítica",
+  "composicion": "Uno o varios elementos mezclados en una matriz",
+  "analogo": "Ripio, Grava, Gravilla fina",
+  "diagnostico": [
+   "Predominan clastos > 2 mm",
+   "Clastos angulosos en su mayoría",
+   "Mala selección y polimíctico (clastos de distintas composiciones)",
+   "Si la matriz es calcárea efervesce con HCl, pero no siempre la tiene"
+  ],
+  "notas": [
+   "Brecha = clastos angulosos (poco transporte). Todo lo demás es igual al conglomerado."
+  ],
+  "truco": "Brecha = clastos angulosos (poco transporte). Todo lo demás es igual al conglomerado.",
+  "gate": [
+   {
+    "label": "Clastos",
+    "keys": [
+     "clasto"
+    ]
+   },
+   {
+    "label": "Grava / ripio",
+    "keys": [
+     "grava",
+     "ripio"
+    ]
+   },
+   {
+    "label": "Matriz",
+    "keys": [
+     "matriz"
+    ]
+   }
+  ],
+  "gateMin": 1,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "clastica",
+     "psefita"
+    ]
+   ],
+   "origen": [
+    [
+     "mecanico",
+     "mecanica",
+     "detritico",
+     "detritica",
+     "transporte",
+     "sedimentacion"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "detritica"
+    ]
+   ],
+   "analogo": [
+    [
+     "ripio"
+    ],
+    [
+     "grava"
+    ],
+    [
+     "gravilla",
+     "gravi"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "sed-caliza",
+  "clase": "Sedimentaria",
+  "claseKey": "sed",
+  "nombre": "Caliza",
+  "alias": [
+   "Caliza",
+   "calizas"
+  ],
+  "img": "fotos-final/sed-q_caliza.jpg",
+  "imgs": [
+   "fotos-final/sed-q_caliza.jpg"
+  ],
+  "subtipo": "Química · No clástica",
+  "estructura": "No clástica / Densa, afanítica, cristalina, porosa, oolítica",
+  "origen": "Medio Químico/Evaporítico/Precipitación",
+  "clasificacion": "Química",
+  "composicion": "Principalmente calcita",
+  "analogo": "Sedimentos carbonatados ricos en Ca, Lodo carbonatado (micrita), Conchas y esqueletos calcáreos",
+  "diagnostico": [
+   "Efervescencia con HCl",
+   "Principalmente colores claros (no exclusivamente): amarillo, rojo, pardo y negro",
+   "La textura oolítica es característica"
+  ],
+  "notas": [
+   "Caliza = burbujea con HCl y es de colores claros. Calcita."
+  ],
+  "truco": "Caliza = burbujea con HCl y es de colores claros. Calcita.",
+  "gate": [
+   {
+    "label": "Calcita",
+    "keys": [
+     "calcita",
+     "carbonato"
+    ]
+   }
+  ],
+  "gateMin": 1,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "no clastica",
+     "densa",
+     "afanitica",
+     "cristalina",
+     "porosa",
+     "oolitica"
+    ]
+   ],
+   "origen": [
+    [
+     "quimico",
+     "quimica",
+     "evaporitico",
+     "evaporitica",
+     "precipitacion"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "quimica"
+    ]
+   ],
+   "analogo": [
+    [
+     "sedimentos",
+     "sedim"
+    ],
+    [
+     "lodo"
+    ],
+    [
+     "conchas",
+     "conch"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "sed-dolomia",
+  "clase": "Sedimentaria",
+  "claseKey": "sed",
+  "nombre": "Dolomía",
+  "alias": [
+   "Dolomía",
+   "dolomias",
+   "Dolomita"
+  ],
+  "img": "fotos-final/sed-q_dolomia.jpg",
+  "imgs": [
+   "fotos-final/sed-q_dolomia.jpg"
+  ],
+  "subtipo": "Química · No clástica",
+  "estructura": "No clástica / Densa, afanítica, cristalina",
+  "origen": "Medio Químico/Evaporítico/Precipitación",
+  "clasificacion": "Química",
+  "composicion": "Principalmente dolomita",
+  "analogo": "Sedimentos carbonatados ricos en Ca y Mg, Caliza preexistente (dolomitización), Lodo carbonatado con Mg",
+  "diagnostico": [
+   "Efervescencia con HCl",
+   "Principalmente colores oscuros (no exclusivamente)",
+   "Difícil de diferenciar de la caliza en muestra de mano",
+   "Raramente presenta fósiles"
+  ],
+  "notas": [
+   "Dolomía = caliza oscura con Mg, sin fósiles. Mineral: dolomita."
+  ],
+  "truco": "Dolomía = caliza oscura con Mg, sin fósiles. Mineral: dolomita.",
+  "gate": [
+   {
+    "label": "Dolomita",
+    "keys": [
+     "dolomita",
+     "carbonato"
+    ]
+   }
+  ],
+  "gateMin": 1,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "no clastica",
+     "densa",
+     "afanitica",
+     "cristalina"
+    ]
+   ],
+   "origen": [
+    [
+     "quimico",
+     "quimica",
+     "evaporitico",
+     "evaporitica",
+     "precipitacion"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "quimica"
+    ]
+   ],
+   "analogo": [
+    [
+     "sedimentos",
+     "sedim"
+    ],
+    [
+     "caliza",
+     "caliz"
+    ],
+    [
+     "lodo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "sed-marga",
+  "clase": "Sedimentaria",
+  "claseKey": "sed",
+  "nombre": "Marga",
+  "alias": [
+   "Marga",
+   "margas"
+  ],
+  "img": "fotos-final/sed-q_marga.jpg",
+  "imgs": [
+   "fotos-final/sed-q_marga.jpg"
+  ],
+  "subtipo": "Química · No clástica",
+  "estructura": "No clástica / Cristalina de grano fino",
+  "origen": "Medio Químico/Evaporítico/Precipitación",
+  "clasificacion": "Química",
+  "composicion": "Mezcla de materia calcárea y minerales arcillosos",
+  "analogo": "Sedimentos arcillosos y calcáreos, Arcilla, Lodo calcáreo",
+  "diagnostico": [
+   "Efervescencia con HCl",
+   "Grano muy fino (parecida a fangolita o lutita)",
+   "Desmenuzable",
+   "La presencia de fósiles es característica"
+  ],
+  "notas": [
+   "Marga = barro + cal: fina, desmenuzable, con fósiles y burbujea con HCl."
+  ],
+  "truco": "Marga = barro + cal: fina, desmenuzable, con fósiles y burbujea con HCl.",
+  "gate": [
+   {
+    "label": "Carbonato / calcita",
+    "keys": [
+     "calcita",
+     "carbonato"
+    ]
+   },
+   {
+    "label": "Arcilla",
+    "keys": [
+     "arcilla",
+     "arcilloso"
+    ]
+   }
+  ],
+  "gateMin": 2,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "no clastica",
+     "cristalina"
+    ]
+   ],
+   "origen": [
+    [
+     "quimico",
+     "quimica",
+     "evaporitico",
+     "evaporitica",
+     "precipitacion"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "quimica"
+    ]
+   ],
+   "analogo": [
+    [
+     "sedimentos",
+     "sedim"
+    ],
+    [
+     "arcilla",
+     "arcil"
+    ],
+    [
+     "lodo"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "sed-silex",
+  "clase": "Sedimentaria",
+  "claseKey": "sed",
+  "nombre": "Sílex",
+  "alias": [
+   "Sílex",
+   "pedernal"
+  ],
+  "img": "fotos-final/sed-q_silex.jpg",
+  "imgs": [
+   "fotos-final/sed-q_silex.jpg"
+  ],
+  "subtipo": "Química · No clástica",
+  "estructura": "No clástica / Densa, afanítica, en fajas",
+  "origen": "Medio Químico/Evaporítico/Precipitación",
+  "clasificacion": "Química",
+  "composicion": "Mezcla de sílice coloidal, ópalo y calcedonia",
+  "analogo": "Soluciones coloidales, Sílice disuelta en agua marina, Restos silíceos de organismos (radiolarios, diatomeas, esponjas)",
+  "diagnostico": [
+   "Abigarrada (varios colores)",
+   "Dura; olor a quemado al golpe de martillo",
+   "Fractura concoidea",
+   "Brillo mate o semivítreo",
+   "Cuarzo macizo/amorfo"
+  ],
+  "notas": [
+   "Sílex = Súper duro, sin burbujas, fractura concoidea (como vidrio roto)."
+  ],
+  "truco": "Sílex = Súper duro, sin burbujas, fractura concoidea (como vidrio roto).",
+  "gate": [
+   {
+    "label": "Sílice",
+    "keys": [
+     "silice"
+    ]
+   },
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Ópalo",
+    "keys": [
+     "opalo"
+    ]
+   },
+   {
+    "label": "Calcedonia",
+    "keys": [
+     "calcedonia"
+    ]
+   }
+  ],
+  "gateMin": 1,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "no clastica",
+     "densa",
+     "afanitica"
+    ]
+   ],
+   "origen": [
+    [
+     "quimico",
+     "quimica",
+     "evaporitico",
+     "evaporitica",
+     "precipitacion"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "quimica"
+    ]
+   ],
+   "analogo": [
+    [
+     "soluciones",
+     "soluc"
+    ],
+    [
+     "silice",
+     "silic"
+    ],
+    [
+     "restos",
+     "resto"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "sed-travertino",
+  "clase": "Sedimentaria",
+  "claseKey": "sed",
+  "nombre": "Travertino",
+  "alias": [
+   "Travertino"
+  ],
+  "img": "fotos-final/sed-q_travertino.jpg",
+  "imgs": [
+   "fotos-final/sed-q_travertino.jpg"
+  ],
+  "subtipo": "Química · Clástica",
+  "estructura": "Clástica / Porosa",
+  "origen": "Medio Químico/Evaporítico/Precipitación",
+  "clasificacion": "Química",
+  "composicion": "Principalmente carbonatos",
+  "analogo": "Sedimentos carbonatados ricos en Ca, Aguas termales o manantiales ricos en bicarbonato de Ca, Calizas preexistentes disueltas (karst)",
+  "diagnostico": [
+   "Efervescencia con HCl",
+   "Colores pardos",
+   "Textura porosa"
+  ],
+  "notas": [
+   "Travertino = Tubos y poros, color pardo, nace de aguas ricas en carbonato."
+  ],
+  "truco": "Travertino = Tubos y poros, color pardo, nace de aguas ricas en carbonato.",
+  "gate": [
+   {
+    "label": "Carbonato",
+    "keys": [
+     "carbonato",
+     "calcita"
+    ]
+   }
+  ],
+  "gateMin": 1,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "clastica",
+     "porosa"
+    ]
+   ],
+   "origen": [
+    [
+     "quimico",
+     "quimica",
+     "evaporitico",
+     "evaporitica",
+     "precipitacion"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "quimica"
+    ]
+   ],
+   "analogo": [
+    [
+     "sedimentos",
+     "sedim"
+    ],
+    [
+     "aguas"
+    ],
+    [
+     "calizas",
+     "caliz"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "sed-sal_gema",
+  "clase": "Sedimentaria",
+  "claseKey": "sed",
+  "nombre": "Sal gema",
+  "alias": [
+   "Sal gema",
+   "sal",
+   "halita"
+  ],
+  "img": "fotos-final/sed-q_sal_gema.jpg",
+  "imgs": [
+   "fotos-final/sed-q_sal_gema.jpg"
+  ],
+  "subtipo": "Química · No clástica",
+  "estructura": "No clástica / Cristalina o masiva",
+  "origen": "Medio Químico/Evaporítico/Precipitación",
+  "clasificacion": "Química",
+  "composicion": "Principalmente halita",
+  "analogo": "Na⁺ y Cl⁻ en disolución, Agua de mar, Salmueras de lagos y cuencas cerradas",
+  "diagnostico": [
+   "Agregados cristalinos",
+   "Sabor salado",
+   "A veces se ven cristales de halita bien formados"
+  ],
+  "notas": [
+   "Sal gema = la única que sabe salada (halita)."
+  ],
+  "truco": "Sal gema = la única que sabe salada (halita).",
+  "gate": [
+   {
+    "label": "Halita",
+    "keys": [
+     "halita",
+     "sal"
+    ]
+   }
+  ],
+  "gateMin": 1,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "no clastica",
+     "cristalina"
+    ]
+   ],
+   "origen": [
+    [
+     "quimico",
+     "quimica",
+     "evaporitico",
+     "evaporitica",
+     "precipitacion"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "quimica"
+    ]
+   ],
+   "analogo": [
+    [
+     "disolucion",
+     "disol"
+    ],
+    [
+     "agua"
+    ],
+    [
+     "salmueras",
+     "salmu"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "sed-yeso",
+  "clase": "Sedimentaria",
+  "claseKey": "sed",
+  "nombre": "Yeso",
+  "alias": [
+   "Yeso"
+  ],
+  "img": "fotos-final/sed-q_yeso.jpg",
+  "imgs": [
+   "fotos-final/sed-q_yeso.jpg"
+  ],
+  "subtipo": "Química · No clástica",
+  "estructura": "No clástica / Cristalina o masiva",
+  "origen": "Medio Químico/Evaporítico/Precipitación",
+  "clasificacion": "Química",
+  "composicion": "Principalmente yeso",
+  "analogo": "Solución sulfatada rica en Ca, Agua de mar evaporada, Anhidrita rehidratada",
+  "diagnostico": [
+   "Textura cristalina",
+   "Hábito laminar",
+   "Dureza muy baja: se raya con la uña"
+  ],
+  "notas": [
+   "Yeso = la uña lo raya."
+  ],
+  "truco": "Yeso = la uña lo raya.",
+  "gate": [
+   {
+    "label": "Yeso / sulfato",
+    "keys": [
+     "yeso",
+     "sulfato"
+    ]
+   }
+  ],
+  "gateMin": 1,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "no clastica",
+     "cristalina"
+    ]
+   ],
+   "origen": [
+    [
+     "quimico",
+     "quimica",
+     "evaporitico",
+     "evaporitica",
+     "precipitacion"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "quimica"
+    ]
+   ],
+   "analogo": [
+    [
+     "solucion",
+     "soluc"
+    ],
+    [
+     "agua"
+    ],
+    [
+     "anhidrita",
+     "anhid"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "sed-anhidrita",
+  "clase": "Sedimentaria",
+  "claseKey": "sed",
+  "nombre": "Anhidrita",
+  "alias": [
+   "Anhidrita"
+  ],
+  "img": "fotos-final/sed-q_anhidrita.jpg",
+  "imgs": [
+   "fotos-final/sed-q_anhidrita.jpg"
+  ],
+  "subtipo": "Química · No clástica",
+  "estructura": "No clástica / Cristalina",
+  "origen": "Medio Químico/Evaporítico/Precipitación",
+  "clasificacion": "Química",
+  "composicion": "Principalmente anhidrita",
+  "analogo": "Deshidratación de depósitos de yeso, Solución sulfatada rica en Ca, Salmueras evaporíticas muy concentradas",
+  "diagnostico": [
+   "Textura cristalina, hábito masivo o granular",
+   "Brillo vítreo",
+   "Más dura que el yeso: carece de agua en su fórmula"
+  ],
+  "notas": [
+   "An-hidrita = sin agua. Más dura que el yeso: la uña no la raya."
+  ],
+  "truco": "An-hidrita = sin agua. Más dura que el yeso: la uña no la raya.",
+  "gate": [
+   {
+    "label": "Anhidrita / sulfato",
+    "keys": [
+     "anhidrita",
+     "sulfato"
+    ]
+   }
+  ],
+  "gateMin": 1,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "no clastica",
+     "cristalina"
+    ]
+   ],
+   "origen": [
+    [
+     "quimico",
+     "quimica",
+     "evaporitico",
+     "evaporitica",
+     "precipitacion"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "quimica"
+    ]
+   ],
+   "analogo": [
+    [
+     "deshidratacion",
+     "deshi"
+    ],
+    [
+     "solucion",
+     "soluc"
+    ],
+    [
+     "salmueras",
+     "salmu"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "sed-coquina",
+  "clase": "Sedimentaria",
+  "claseKey": "sed",
+  "nombre": "Coquina",
+  "alias": [
+   "Coquina"
+  ],
+  "img": "fotos-final/sed-q_coquina.jpg",
+  "imgs": [
+   "fotos-final/sed-q_coquina.jpg"
+  ],
+  "subtipo": "Bioquímica · Bioclástica",
+  "estructura": "Bioclástica / Biogranular, grano grueso",
+  "origen": "Bioquímica",
+  "clasificacion": "Bioquímica",
+  "composicion": "Conchas",
+  "analogo": "Conchas, Moluscos (bivalvos y gastrópodos), Fragmentos bioclásticos / arena carbonatada",
+  "diagnostico": [
+   "Efervescencia con HCl",
+   "Agregado de conchas de diversos moluscos",
+   "Muy frágil"
+  ],
+  "notas": [
+   "Coquina = Conchas COmpactadas, se desarma fácil."
+  ],
+  "truco": "Coquina = Conchas COmpactadas, se desarma fácil.",
+  "gate": [
+   {
+    "label": "Conchas",
+    "keys": [
+     "concha"
+    ]
+   },
+   {
+    "label": "Carbonato",
+    "keys": [
+     "carbonato",
+     "calcita"
+    ]
+   }
+  ],
+  "gateMin": 1,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "bioclastica",
+     "biogranular",
+     "grano",
+     "grueso"
+    ]
+   ],
+   "origen": [
+    [
+     "bioquimico",
+     "bioquimica",
+     "organico",
+     "organica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "bioquimica"
+    ]
+   ],
+   "analogo": [
+    [
+     "concha",
+     "carbonato"
+    ],
+    [
+     "moluscos",
+     "molus"
+    ],
+    [
+     "fragmentos",
+     "fragm"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "sed-bituminoso",
+  "clase": "Sedimentaria",
+  "claseKey": "sed",
+  "nombre": "Carbón bituminoso",
+  "alias": [
+   "Carbón bituminoso",
+   "bituminoso",
+   "carbon",
+   "hulla"
+  ],
+  "img": "fotos-final/sed-q_bituminoso.jpg",
+  "imgs": [
+   "fotos-final/sed-q_bituminoso.jpg"
+  ],
+  "subtipo": "Bioquímica · No clástica",
+  "estructura": "No clástica / Amorfa",
+  "origen": "Bioquímica",
+  "clasificacion": "Bioquímica",
+  "composicion": "Masa orgánica: C 60–92 %, H 3–6 %, H₂O 5–30 %",
+  "analogo": "Restos vegetales, Turba, Lignito (carbón de menor rango)",
+  "diagnostico": [
+   "Color negro o pardo",
+   "Raya negra o café oscuro",
+   "Mancha los dedos",
+   "Brillo mate",
+   "Fractura prismática"
+  ],
+  "notas": [
+   "Rango del carbón: turba → lignito → bituminoso → antracita. Bituminoso = mate, 60–92 % de C."
+  ],
+  "truco": "Rango del carbón: turba → lignito → bituminoso → antracita. Bituminoso = mate, 60–92 % de C.",
+  "gate": [
+   {
+    "label": "Carbón",
+    "keys": [
+     "carbon"
+    ]
+   },
+   {
+    "label": "Materia orgánica",
+    "keys": [
+     "organica"
+    ]
+   }
+  ],
+  "gateMin": 1,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "no clastica",
+     "amorfa"
+    ]
+   ],
+   "origen": [
+    [
+     "bioquimico",
+     "bioquimica",
+     "organico",
+     "organica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "bioquimica"
+    ]
+   ],
+   "analogo": [
+    [
+     "restos",
+     "resto"
+    ],
+    [
+     "turba"
+    ],
+    [
+     "lignito",
+     "ligni"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "sed-antracita",
+  "clase": "Sedimentaria",
+  "claseKey": "sed",
+  "nombre": "Carbón antracita",
+  "alias": [
+   "Carbón antracita",
+   "antracita"
+  ],
+  "img": "fotos-final/sed-q_antracita.jpg",
+  "imgs": [
+   "fotos-final/sed-q_antracita.jpg"
+  ],
+  "subtipo": "Bioquímica · No clástica",
+  "estructura": "No clástica / Amorfa fajeada",
+  "origen": "Bioquímica",
+  "clasificacion": "Bioquímica",
+  "composicion": "Masa orgánica: C 92–97 %, H 1–3 %, H₂O 1–3 %",
+  "analogo": "Restos vegetales, Carbón bituminoso (más temperatura y presión), Turba y lignito",
+  "diagnostico": [
+   "Color negro a gris acero o pardo",
+   "Raya negra o café oscuro",
+   "Mancha los dedos",
+   "Brillo llamativo",
+   "Fractura prismática"
+  ],
+  "notas": [
+   "Antracita = brillante, el carbón de mayor rango: 92–97 % de C y casi sin agua."
+  ],
+  "truco": "Antracita = brillante, el carbón de mayor rango: 92–97 % de C y casi sin agua.",
+  "gate": [
+   {
+    "label": "Carbón",
+    "keys": [
+     "carbon"
+    ]
+   },
+   {
+    "label": "Materia orgánica",
+    "keys": [
+     "organica"
+    ]
+   }
+  ],
+  "gateMin": 1,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "no clastica",
+     "amorfa",
+     "fajeada"
+    ]
+   ],
+   "origen": [
+    [
+     "bioquimico",
+     "bioquimica",
+     "organico",
+     "organica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "bioquimica"
+    ]
+   ],
+   "analogo": [
+    [
+     "restos",
+     "resto"
+    ],
+    [
+     "carbon",
+     "carbo"
+    ],
+    [
+     "turba"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "met-pizarra",
+  "clase": "Metamórfica",
+  "claseKey": "met",
+  "nombre": "Pizarra",
+  "alias": [
+   "Pizarra"
+  ],
+  "img": "fotos-final/met-pizarra.jpg",
+  "imgs": [
+   "fotos-final/met-pizarra.jpg"
+  ],
+  "subtipo": "Foliada · Regional",
+  "estructura": "Foliada · Lepidoblástica",
+  "origen": "Regional · Bajo grado",
+  "clasificacion": "Esquistos verdes",
+  "composicion": "Cuarzo afanítico, Feldespato, Clorita, Minerales arcillosos",
+  "analogo": "Argilita, Rocas tobáceas, Rocas de grano fino, Lutita",
+  "diagnostico": [
+   "Brillo escaso",
+   "textura laminar",
+   "foliación poco penetrativa"
+  ],
+  "notas": [],
+  "factores": "T baja a intermedia · P baja a intermedia",
+  "gate": [
+   {
+    "label": "Cuarzo afanítico",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Feldespato",
+    "keys": [
+     "feldespato"
+    ]
+   },
+   {
+    "label": "Clorita",
+    "keys": [
+     "clorita"
+    ]
+   },
+   {
+    "label": "Minerales arcillosos",
+    "keys": [
+     "arcilla",
+     "arcilloso"
+    ]
+   }
+  ],
+  "gateExtra": [],
+  "gateMin": 2,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "foliada"
+    ],
+    [
+     "lepidoblast"
+    ]
+   ],
+   "origen": [
+    [
+     "regional"
+    ],
+    [
+     "bajo"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "esquistos verdes",
+     "esquisto verde"
+    ]
+   ],
+   "analogo": [
+    [
+     "argilita",
+     "argil"
+    ],
+    [
+     "tobaceas",
+     "tobac"
+    ],
+    [
+     "rocas de grano fino"
+    ],
+    [
+     "lutita",
+     "lutit"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "met-filita",
+  "clase": "Metamórfica",
+  "claseKey": "met",
+  "nombre": "Filita",
+  "alias": [
+   "Filita"
+  ],
+  "img": "fotos-final/met-filita.jpg",
+  "imgs": [
+   "fotos-final/met-filita.jpg"
+  ],
+  "subtipo": "Foliada · Regional",
+  "estructura": "Foliada · Lepidoblástica",
+  "origen": "Regional · Bajo grado",
+  "clasificacion": "Esquistos verdes",
+  "composicion": "Cuarzo de grano fino, Mica, Clorita, Sericita, Otros",
+  "analogo": "Argilita, Limonita",
+  "diagnostico": [
+   "Brillo notorio",
+   "textura laminar",
+   "compuesta principalmente por micas"
+  ],
+  "notas": [
+   "El PPT escribe «limonita» como protolito (probablemente limolita)."
+  ],
+  "factores": "T baja a intermedia · P baja a intermedia",
+  "gate": [
+   {
+    "label": "Cuarzo de grano fino",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Mica",
+    "keys": [
+     "mica"
+    ]
+   },
+   {
+    "label": "Clorita",
+    "keys": [
+     "clorita"
+    ]
+   },
+   {
+    "label": "Sericita",
+    "keys": [
+     "sericita",
+     "mica"
+    ]
+   }
+  ],
+  "gateExtra": [],
+  "gateMin": 2,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "foliada"
+    ],
+    [
+     "lepidoblast"
+    ]
+   ],
+   "origen": [
+    [
+     "regional"
+    ],
+    [
+     "bajo"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "esquistos verdes",
+     "esquisto verde"
+    ]
+   ],
+   "analogo": [
+    [
+     "argilita",
+     "argil"
+    ],
+    [
+     "limonita",
+     "limon"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "met-talco",
+  "clase": "Metamórfica",
+  "claseKey": "met",
+  "nombre": "Esquisto de talco",
+  "alias": [
+   "Esquisto de talco",
+   "Esquisto talcoso"
+  ],
+  "img": "fotos-final/met-talco.jpg",
+  "imgs": [
+   "fotos-final/met-talco.jpg"
+  ],
+  "subtipo": "Foliada · Regional",
+  "estructura": "Foliada · Lepidoblástica",
+  "origen": "Regional · Bajo grado",
+  "clasificacion": "Esquistos verdes",
+  "composicion": "Talco, Carbonatos, Magnetita, Silicatos de Mg",
+  "analogo": "Rocas máficas, Rocas ultramáficas, Otros ricos en Mg",
+  "diagnostico": [
+   "Brillo graso",
+   "estructura foliada",
+   "baja dureza"
+  ],
+  "notas": [],
+  "factores": "T baja a intermedia · P baja a intermedia",
+  "gate": [
+   {
+    "label": "Talco",
+    "keys": [
+     "talco"
+    ]
+   },
+   {
+    "label": "Carbonatos",
+    "keys": [
+     "carbonato",
+     "calcita"
+    ]
+   },
+   {
+    "label": "Magnetita",
+    "keys": [
+     "magnetita"
+    ]
+   },
+   {
+    "label": "Silicatos de Mg",
+    "keys": [
+     "silicato",
+     "magnesio",
+     "mg"
+    ]
+   }
+  ],
+  "gateExtra": [],
+  "gateMin": 2,
+  "gateMust": [
+   [
+    "talco"
+   ]
+  ],
+  "check": {
+   "estructura": [
+    [
+     "foliada"
+    ],
+    [
+     "lepidoblast"
+    ]
+   ],
+   "origen": [
+    [
+     "regional"
+    ],
+    [
+     "bajo"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "esquistos verdes",
+     "esquisto verde"
+    ]
+   ],
+   "analogo": [
+    [
+     "maficas",
+     "mafic"
+    ],
+    [
+     "ultramaficas",
+     "ultra"
+    ],
+    [
+     "ricos"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "met-quiastolita",
+  "clase": "Metamórfica",
+  "claseKey": "met",
+  "nombre": "Esquisto de quiastolita",
+  "alias": [
+   "Esquisto de quiastolita",
+   "Esquisto de andalucita",
+   "Esquisto quiastolítico"
+  ],
+  "img": "fotos-final/met-quiastolita.jpg",
+  "imgs": [
+   "fotos-final/met-quiastolita.jpg"
+  ],
+  "subtipo": "Foliada · Regional",
+  "estructura": "Foliada · Porfidoblástica",
+  "origen": "Regional · Medio-alto grado",
+  "clasificacion": "Epidota-anfíbol",
+  "composicion": "Quiastolita-andalucita, Cuarzo, Micas, Granates",
+  "analogo": "Sedimentos arcillosos, Pizarra, Limonita",
+  "diagnostico": [
+   "Foliación penetrativa",
+   "textura esquistosa",
+   "presencia de andalucita"
+  ],
+  "notas": [
+   "La lámina del PPT se llama «Esquisto de andalucita». Si se le ve la cruz, queda como esquisto de quiastolita."
+  ],
+  "factores": "T intermedia · P intermedia",
+  "gate": [
+   {
+    "label": "Quiastolita-andalucita",
+    "keys": [
+     "quiastolita",
+     "andalucita"
+    ]
+   },
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Micas",
+    "keys": [
+     "mica"
+    ]
+   },
+   {
+    "label": "Granates",
+    "keys": [
+     "granate"
+    ]
+   }
+  ],
+  "gateExtra": [],
+  "gateMin": 2,
+  "gateMust": [
+   [
+    "quiastolita",
+    "andalucita"
+   ]
+  ],
+  "check": {
+   "estructura": [
+    [
+     "foliada"
+    ],
+    [
+     "porfidoblast"
+    ]
+   ],
+   "origen": [
+    [
+     "regional"
+    ],
+    [
+     "medio alto",
+     "medioalto"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "epidota",
+     "anfibol"
+    ]
+   ],
+   "analogo": [
+    [
+     "sedimentos",
+     "sedim"
+    ],
+    [
+     "pizarra",
+     "pizar"
+    ],
+    [
+     "limonita",
+     "limon"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "met-granate",
+  "clase": "Metamórfica",
+  "claseKey": "met",
+  "nombre": "Esquisto de granate",
+  "alias": [
+   "Esquisto de granate",
+   "Esquisto granatífero"
+  ],
+  "img": "fotos-final/met-granate.jpg",
+  "imgs": [
+   "fotos-final/met-granate.jpg"
+  ],
+  "subtipo": "Foliada · Regional",
+  "estructura": "Foliada · Porfidoblástica",
+  "origen": "Regional · Medio-alto grado",
+  "clasificacion": "Epidota-anfíbol",
+  "composicion": "Granate, Micas, Feldespatos, Hornblenda, Cuarzo",
+  "analogo": "Roca pelítica, Granito",
+  "diagnostico": [
+   "Foliación penetrativa",
+   "textura esquistosa",
+   "presencia de granates"
+  ],
+  "notas": [
+   "En la foto hay variantes con mica y sin mica."
+  ],
+  "factores": "T intermedia · P intermedia",
+  "gate": [
+   {
+    "label": "Granate",
+    "keys": [
+     "granate"
+    ]
+   },
+   {
+    "label": "Micas",
+    "keys": [
+     "mica"
+    ]
+   },
+   {
+    "label": "Feldespatos",
+    "keys": [
+     "feldespato"
+    ]
+   },
+   {
+    "label": "Hornblenda",
+    "keys": [
+     "hornblenda",
+     "anfibol"
+    ]
+   },
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   }
+  ],
+  "gateExtra": [],
+  "gateMin": 2,
+  "gateMust": [
+   [
+    "granate"
+   ]
+  ],
+  "check": {
+   "estructura": [
+    [
+     "foliada"
+    ],
+    [
+     "porfidoblast"
+    ]
+   ],
+   "origen": [
+    [
+     "regional"
+    ],
+    [
+     "medio alto",
+     "medioalto"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "epidota",
+     "anfibol"
+    ]
+   ],
+   "analogo": [
+    [
+     "roca"
+    ],
+    [
+     "granito",
+     "grani"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "met-mica",
+  "clase": "Metamórfica",
+  "claseKey": "met",
+  "nombre": "Esquisto de mica",
+  "alias": [
+   "Esquisto de mica",
+   "Esquisto micáceo",
+   "Mica"
+  ],
+  "img": "fotos-final/met-mica.jpg",
+  "imgs": [
+   "fotos-final/met-mica.jpg"
+  ],
+  "subtipo": "Foliada · Regional",
+  "estructura": "Foliada · Lepidoblástica",
+  "origen": "Regional · Bajo grado",
+  "clasificacion": "Esquistos verdes",
+  "composicion": "Mica, Clorita, Cuarzo, Feldespato, Turmalina, Epidota, Calcita",
+  "analogo": "Pizarra, Argilita, Limolita, Arenisca, Lutita, Riolita, Toba",
+  "diagnostico": [
+   "Foliación penetrativa",
+   "textura esquistosa",
+   "presencia de micas"
+  ],
+  "notas": [],
+  "factores": "T baja a intermedia · P baja a intermedia",
+  "gate": [
+   {
+    "label": "Mica",
+    "keys": [
+     "mica"
+    ]
+   },
+   {
+    "label": "Clorita",
+    "keys": [
+     "clorita"
+    ]
+   },
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Feldespato",
+    "keys": [
+     "feldespato"
+    ]
+   },
+   {
+    "label": "Turmalina",
+    "keys": [
+     "turmalina"
+    ]
+   },
+   {
+    "label": "Epidota",
+    "keys": [
+     "epidota"
+    ]
+   },
+   {
+    "label": "Calcita",
+    "keys": [
+     "calcita",
+     "carbonato"
+    ]
+   }
+  ],
+  "gateExtra": [],
+  "gateMin": 3,
+  "gateMust": [
+   [
+    "mica"
+   ]
+  ],
+  "check": {
+   "estructura": [
+    [
+     "foliada"
+    ],
+    [
+     "lepidoblast"
+    ]
+   ],
+   "origen": [
+    [
+     "regional"
+    ],
+    [
+     "bajo"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "esquistos verdes",
+     "esquisto verde"
+    ]
+   ],
+   "analogo": [
+    [
+     "pizarra",
+     "pizar"
+    ],
+    [
+     "argilita",
+     "argil"
+    ],
+    [
+     "limolita",
+     "limol"
+    ],
+    [
+     "arenisca",
+     "areni"
+    ],
+    [
+     "lutita",
+     "lutit"
+    ],
+    [
+     "riolita",
+     "rioli"
+    ],
+    [
+     "toba"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "met-verde",
+  "clase": "Metamórfica",
+  "claseKey": "met",
+  "nombre": "Esquisto verde",
+  "alias": [
+   "Esquisto verde"
+  ],
+  "img": "fotos-final/met-verde.jpg",
+  "imgs": [
+   "fotos-final/met-verde.jpg"
+  ],
+  "subtipo": "Foliada · Regional",
+  "estructura": "Foliada · Lepidoblástica",
+  "origen": "Regional · Bajo grado",
+  "clasificacion": "Esquistos verdes",
+  "composicion": "Albita, Clorita, Actinolita, Epidota, Feldespato, Cuarzo",
+  "analogo": "Basalto, Andesita, Toba",
+  "diagnostico": [
+   "Foliación penetrativa",
+   "textura esquistosa",
+   "presencia de minerales verdes"
+  ],
+  "notas": [],
+  "factores": "T baja a intermedia · P baja a intermedia",
+  "gate": [
+   {
+    "label": "Albita",
+    "keys": [
+     "albita"
+    ]
+   },
+   {
+    "label": "Clorita",
+    "keys": [
+     "clorita"
+    ]
+   },
+   {
+    "label": "Actinolita",
+    "keys": [
+     "actinolita"
+    ]
+   },
+   {
+    "label": "Epidota",
+    "keys": [
+     "epidota"
+    ]
+   },
+   {
+    "label": "Feldespato",
+    "keys": [
+     "feldespato"
+    ]
+   },
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   }
+  ],
+  "gateExtra": [],
+  "gateMin": 3,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "foliada"
+    ],
+    [
+     "lepidoblast"
+    ]
+   ],
+   "origen": [
+    [
+     "regional"
+    ],
+    [
+     "bajo"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "esquistos verdes",
+     "esquisto verde"
+    ]
+   ],
+   "analogo": [
+    [
+     "basalto",
+     "basal"
+    ],
+    [
+     "andesita",
+     "andes"
+    ],
+    [
+     "toba"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "met-albita",
+  "clase": "Metamórfica",
+  "claseKey": "met",
+  "nombre": "Esquisto de albita",
+  "alias": [
+   "Esquisto de albita",
+   "Esquisto albítico"
+  ],
+  "img": "fotos-final/met-albita.jpg",
+  "imgs": [
+   "fotos-final/met-albita.jpg"
+  ],
+  "subtipo": "Foliada · Regional",
+  "estructura": "Foliada · Nematolepidoblástica",
+  "origen": "Regional · Medio-alto grado",
+  "clasificacion": "Esquistos verdes",
+  "composicion": "Albita, Clorita, Cuarzo, Actinolita",
+  "analogo": "Rocas máficas",
+  "diagnostico": [
+   "Foliación penetrativa",
+   "textura esquistosa",
+   "se observan puntos anaranjados"
+  ],
+  "notas": [
+   "Tal como está en el PPT: grado medio-alto con facie de esquistos verdes."
+  ],
+  "factores": "T baja a intermedia · P baja a intermedia",
+  "gate": [
+   {
+    "label": "Albita",
+    "keys": [
+     "albita"
+    ]
+   },
+   {
+    "label": "Clorita",
+    "keys": [
+     "clorita"
+    ]
+   },
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Actinolita",
+    "keys": [
+     "actinolita"
+    ]
+   }
+  ],
+  "gateExtra": [],
+  "gateMin": 2,
+  "gateMust": [
+   [
+    "albita"
+   ]
+  ],
+  "check": {
+   "estructura": [
+    [
+     "foliada"
+    ],
+    [
+     "lepidoblast",
+     "nematolepidoblast",
+     "nematoblast"
+    ]
+   ],
+   "origen": [
+    [
+     "regional"
+    ],
+    [
+     "medio alto",
+     "medioalto"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "esquistos verdes",
+     "esquisto verde"
+    ]
+   ],
+   "analogo": [
+    [
+     "maficas",
+     "mafic"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "met-sillimanita",
+  "clase": "Metamórfica",
+  "claseKey": "met",
+  "nombre": "Esquisto de sillimanita",
+  "alias": [
+   "Esquisto de sillimanita",
+   "Esquisto sillimanítico"
+  ],
+  "img": "fotos-final/met-sillimanita.jpg",
+  "imgs": [
+   "fotos-final/met-sillimanita.jpg"
+  ],
+  "subtipo": "Foliada · Regional",
+  "estructura": "Foliada · Nematoblástica",
+  "origen": "Regional · Alto grado",
+  "clasificacion": "No indicada",
+  "composicion": "Sillimanita",
+  "analogo": "Sedimentos arcillosos, Pizarra, Limolitas",
+  "diagnostico": [
+   "Presencia de sillimanita",
+   "estructura foliada",
+   "textura nematoblástica"
+  ],
+  "notas": [
+   "Foto sacada del PPT (no tienes foto propia de esta roca)."
+  ],
+  "factores": "No indicado",
+  "gate": [
+   {
+    "label": "Sillimanita",
+    "keys": [
+     "sillimanita"
+    ]
+   }
+  ],
+  "gateExtra": [],
+  "gateMin": 1,
+  "gateMust": [
+   [
+    "sillimanita"
+   ]
+  ],
+  "check": {
+   "estructura": [
+    [
+     "foliada"
+    ],
+    [
+     "nematoblast"
+    ]
+   ],
+   "origen": [
+    [
+     "regional"
+    ],
+    [
+     "alto"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "no indicada",
+     "no aplica",
+     "ninguna",
+     "sin facie"
+    ]
+   ],
+   "analogo": [
+    [
+     "sedimentos",
+     "sedim"
+    ],
+    [
+     "pizarra",
+     "pizar"
+    ],
+    [
+     "limolitas",
+     "limol"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "met-estaurolita",
+  "clase": "Metamórfica",
+  "claseKey": "met",
+  "nombre": "Esquisto de estaurolita",
+  "alias": [
+   "Esquisto de estaurolita",
+   "Esquisto estaurolítico"
+  ],
+  "img": "fotos-final/met-estaurolita.jpg",
+  "imgs": [
+   "fotos-final/met-estaurolita.jpg"
+  ],
+  "subtipo": "Foliada · Regional",
+  "estructura": "Foliada · Nematoblástica",
+  "origen": "Regional · Alto grado",
+  "clasificacion": "No indicada",
+  "composicion": "Estaurolita, Micas",
+  "analogo": "Sedimentos arcillosos, Pizarra, Limolitas",
+  "diagnostico": [
+   "Presencia de estaurolita",
+   "estructura foliada",
+   "textura nematoblástica"
+  ],
+  "notas": [],
+  "factores": "No indicado",
+  "gate": [
+   {
+    "label": "Estaurolita",
+    "keys": [
+     "estaurolita"
+    ]
+   },
+   {
+    "label": "Micas",
+    "keys": [
+     "mica"
+    ]
+   }
+  ],
+  "gateExtra": [],
+  "gateMin": 2,
+  "gateMust": [
+   [
+    "estaurolita"
+   ]
+  ],
+  "check": {
+   "estructura": [
+    [
+     "foliada"
+    ],
+    [
+     "nematoblast"
+    ]
+   ],
+   "origen": [
+    [
+     "regional"
+    ],
+    [
+     "alto"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "no indicada",
+     "no aplica",
+     "ninguna",
+     "sin facie"
+    ]
+   ],
+   "analogo": [
+    [
+     "sedimentos",
+     "sedim"
+    ],
+    [
+     "pizarra",
+     "pizar"
+    ],
+    [
+     "limolitas",
+     "limol"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "met-grafito",
+  "clase": "Metamórfica",
+  "claseKey": "met",
+  "nombre": "Esquisto de grafito",
+  "alias": [
+   "Esquisto de grafito",
+   "Esquisto grafitoso"
+  ],
+  "img": "fotos-final/met-grafito.jpg",
+  "imgs": [
+   "fotos-final/met-grafito.jpg"
+  ],
+  "subtipo": "Foliada · Regional",
+  "estructura": "Foliada · Lepidoblástica",
+  "origen": "Regional · Medio-alto grado",
+  "clasificacion": "No indicada",
+  "composicion": "Grafito, Micas, Cuarzo",
+  "analogo": "Sedimentos con Ca y Fe, Limolitas, Pizarras, Rocas ígneas máficas e intermedias",
+  "diagnostico": [
+   "Mancha los dedos",
+   "brillo metálico",
+   "tacto graso"
+  ],
+  "notas": [],
+  "factores": "No indicado",
+  "gate": [
+   {
+    "label": "Grafito",
+    "keys": [
+     "grafito"
+    ]
+   },
+   {
+    "label": "Micas",
+    "keys": [
+     "mica"
+    ]
+   },
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   }
+  ],
+  "gateExtra": [],
+  "gateMin": 2,
+  "gateMust": [
+   [
+    "grafito"
+   ]
+  ],
+  "check": {
+   "estructura": [
+    [
+     "foliada"
+    ],
+    [
+     "lepidoblast"
+    ]
+   ],
+   "origen": [
+    [
+     "regional"
+    ],
+    [
+     "medio alto",
+     "medioalto"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "no indicada",
+     "no aplica",
+     "ninguna",
+     "sin facie"
+    ]
+   ],
+   "analogo": [
+    [
+     "sedimentos",
+     "sedim"
+    ],
+    [
+     "limolitas",
+     "limol"
+    ],
+    [
+     "pizarras",
+     "pizar"
+    ],
+    [
+     "igneas",
+     "ignea"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "met-serpentina",
+  "clase": "Metamórfica",
+  "claseKey": "met",
+  "nombre": "Esquisto de serpentina",
+  "alias": [
+   "Esquisto de serpentina",
+   "Esquisto serpentínico"
+  ],
+  "img": "fotos-final/met-serpentina.jpg",
+  "imgs": [
+   "fotos-final/met-serpentina.jpg"
+  ],
+  "subtipo": "Foliada · Regional",
+  "estructura": "Foliada · Lepidoblástica",
+  "origen": "Regional · Medio-alto grado",
+  "clasificacion": "Esquistos verdes",
+  "composicion": "Albita, Clorita, Cuarzo, Actinolita",
+  "analogo": "Rocas ultramáficas, Dunitas, Peridotitas",
+  "diagnostico": [
+   "Foliación penetrativa",
+   "color verde",
+   "tacto graso"
+  ],
+  "notas": [
+   "El PPT repite aquí los componentes del esquisto de albita; en la puerta se acepta también serpentina, talco o magnetita."
+  ],
+  "factores": "T baja a intermedia · P baja a intermedia",
+  "gate": [
+   {
+    "label": "Albita",
+    "keys": [
+     "albita"
+    ]
+   },
+   {
+    "label": "Clorita",
+    "keys": [
+     "clorita"
+    ]
+   },
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Actinolita",
+    "keys": [
+     "actinolita"
+    ]
+   }
+  ],
+  "gateExtra": [
+   {
+    "label": "Serpentina",
+    "keys": [
+     "serpentina"
+    ]
+   },
+   {
+    "label": "Talco",
+    "keys": [
+     "talco"
+    ]
+   },
+   {
+    "label": "Magnetita",
+    "keys": [
+     "magnetita"
+    ]
+   },
+   {
+    "label": "Carbonatos",
+    "keys": [
+     "carbonato",
+     "calcita"
+    ]
+   }
+  ],
+  "gateMin": 2,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "foliada"
+    ],
+    [
+     "lepidoblast"
+    ]
+   ],
+   "origen": [
+    [
+     "regional"
+    ],
+    [
+     "medio alto",
+     "medioalto"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "esquistos verdes",
+     "esquisto verde"
+    ]
+   ],
+   "analogo": [
+    [
+     "ultramaficas",
+     "ultra"
+    ],
+    [
+     "dunitas",
+     "dunit"
+    ],
+    [
+     "peridotitas",
+     "perid"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "met-gneiss",
+  "clase": "Metamórfica",
+  "claseKey": "met",
+  "nombre": "Gneiss",
+  "alias": [
+   "Gneiss",
+   "Gneis"
+  ],
+  "img": "fotos-final/met-gneiss.jpg",
+  "imgs": [
+   "fotos-final/met-gneiss.jpg"
+  ],
+  "subtipo": "Foliada · Regional",
+  "estructura": "Foliada · Bandeada",
+  "origen": "Regional · Medio-alto grado",
+  "clasificacion": "Anfibolita / epidota-anfíbol / granulita",
+  "composicion": "Cuarzo, Feldespato, Biotita, Hornblenda, Turmalina, Granate, Magnetita, Ilmenita",
+  "analogo": "Rocas ígneas félsicas, Areniscas",
+  "diagnostico": [
+   "Textura bandeada",
+   "alternancia de bandas oscuras y claras",
+   "minerales visibles"
+  ],
+  "notas": [],
+  "factores": "Anfibolita: T intermedia a alta · Epidota-anfíbol: T intermedia · Granulita: T alta a muy alta",
+  "gate": [
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Feldespato",
+    "keys": [
+     "feldespato"
+    ]
+   },
+   {
+    "label": "Biotita",
+    "keys": [
+     "biotita",
+     "mica"
+    ]
+   },
+   {
+    "label": "Hornblenda",
+    "keys": [
+     "hornblenda",
+     "anfibol"
+    ]
+   },
+   {
+    "label": "Turmalina",
+    "keys": [
+     "turmalina"
+    ]
+   },
+   {
+    "label": "Granate",
+    "keys": [
+     "granate"
+    ]
+   },
+   {
+    "label": "Magnetita",
+    "keys": [
+     "magnetita"
+    ]
+   },
+   {
+    "label": "Ilmenita",
+    "keys": [
+     "ilmenita"
+    ]
+   }
+  ],
+  "gateExtra": [],
+  "gateMin": 4,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "foliada"
+    ],
+    [
+     "bandead"
+    ]
+   ],
+   "origen": [
+    [
+     "regional"
+    ],
+    [
+     "medio alto",
+     "medioalto"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "epidota",
+     "anfibol"
+    ]
+   ],
+   "analogo": [
+    [
+     "igneas",
+     "ignea"
+    ],
+    [
+     "areniscas",
+     "areni"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "met-metarenita",
+  "clase": "Metamórfica",
+  "claseKey": "met",
+  "nombre": "Metarenita",
+  "alias": [
+   "Metarenita",
+   "Metaarenisca"
+  ],
+  "img": "fotos-final/met-metarenita.jpg",
+  "imgs": [
+   "fotos-final/met-metarenita.jpg"
+  ],
+  "subtipo": "Foliada · Regional",
+  "estructura": "Foliada · Lepidoblástica",
+  "origen": "Regional · Bajo grado",
+  "clasificacion": "Esquistos verdes",
+  "composicion": "Cuarzo afanítico, Feldespato, Clorita, Minerales arcillosos",
+  "analogo": "Arenisca",
+  "diagnostico": [
+   "Aspecto de arenisca con granos alineados",
+   "foliación incipiente",
+   "puede presentar alternancia de bandas oscuras y claras"
+  ],
+  "notas": [],
+  "factores": "T baja a intermedia · P baja a intermedia",
+  "gate": [
+   {
+    "label": "Cuarzo afanítico",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Feldespato",
+    "keys": [
+     "feldespato"
+    ]
+   },
+   {
+    "label": "Clorita",
+    "keys": [
+     "clorita"
+    ]
+   },
+   {
+    "label": "Minerales arcillosos",
+    "keys": [
+     "arcilla",
+     "arcilloso"
+    ]
+   }
+  ],
+  "gateExtra": [],
+  "gateMin": 2,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "foliada"
+    ],
+    [
+     "lepidoblast"
+    ]
+   ],
+   "origen": [
+    [
+     "regional"
+    ],
+    [
+     "bajo"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "esquistos verdes",
+     "esquisto verde"
+    ]
+   ],
+   "analogo": [
+    [
+     "arenisca",
+     "areni"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "met-migmatita",
+  "clase": "Metamórfica",
+  "claseKey": "met",
+  "nombre": "Migmatita",
+  "alias": [
+   "Migmatita"
+  ],
+  "img": "fotos-final/met-migmatita.jpg",
+  "imgs": [
+   "fotos-final/met-migmatita.jpg"
+  ],
+  "subtipo": "No foliada · Regional con magmatismo",
+  "estructura": "No foliada · Bandeada",
+  "origen": "Regional con magmatismo · No indicado",
+  "clasificacion": "Anfibolita",
+  "composicion": "Cuarzo, Feldespato, Biotita, Hornblenda",
+  "analogo": "Mezcla de rocas ígneas félsicas con sedimento",
+  "diagnostico": [
+   "Textura bandeada y plegada",
+   "alternancia de bandas oscuras y claras",
+   "aspecto de granitoide"
+  ],
+  "notas": [
+   "Foto sacada del PPT (no tienes foto propia de esta roca)."
+  ],
+  "factores": "T intermedia a alta · P intermedia",
+  "gate": [
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Feldespato",
+    "keys": [
+     "feldespato"
+    ]
+   },
+   {
+    "label": "Biotita",
+    "keys": [
+     "biotita",
+     "mica"
+    ]
+   },
+   {
+    "label": "Hornblenda",
+    "keys": [
+     "hornblenda",
+     "anfibol"
+    ]
+   }
+  ],
+  "gateExtra": [],
+  "gateMin": 2,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "no foliada"
+    ],
+    [
+     "bandead"
+    ]
+   ],
+   "origen": [
+    [
+     "regional",
+     "magmat"
+    ],
+    [
+     "no indicado",
+     "no se indica",
+     "no aplica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "anfibolita",
+     "anfibol"
+    ]
+   ],
+   "analogo": [
+    [
+     "mezcla",
+     "mezcl"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "met-marmol",
+  "clase": "Metamórfica",
+  "claseKey": "met",
+  "nombre": "Mármol",
+  "alias": [
+   "Mármol"
+  ],
+  "img": "fotos-final/met-marmol.jpg",
+  "imgs": [
+   "fotos-final/met-marmol.jpg"
+  ],
+  "subtipo": "No foliada · De contacto",
+  "estructura": "No foliada · Granoblástica bandeada",
+  "origen": "De contacto · No indicado",
+  "clasificacion": "Corneana de piroxeno",
+  "composicion": "Calcita, Dolomita, Carbonatos",
+  "analogo": "Caliza, Dolomía",
+  "diagnostico": [
+   "Textura bandeada",
+   "efervescencia con HCl",
+   "color claro"
+  ],
+  "notas": [],
+  "factores": "T alta a muy alta · P muy baja a baja",
+  "gate": [
+   {
+    "label": "Calcita",
+    "keys": [
+     "calcita",
+     "carbonato"
+    ]
+   },
+   {
+    "label": "Dolomita",
+    "keys": [
+     "dolomita",
+     "carbonato"
+    ]
+   },
+   {
+    "label": "Carbonatos",
+    "keys": [
+     "carbonato",
+     "calcita"
+    ]
+   }
+  ],
+  "gateExtra": [],
+  "gateMin": 2,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "no foliada"
+    ],
+    [
+     "granoblast",
+     "bandead"
+    ]
+   ],
+   "origen": [
+    [
+     "contacto"
+    ],
+    [
+     "no indicado",
+     "no se indica",
+     "no aplica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "corneana",
+     "sanidinita",
+     "piroxeno"
+    ]
+   ],
+   "analogo": [
+    [
+     "caliza",
+     "caliz"
+    ],
+    [
+     "dolomia",
+     "dolom"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "met-cornea",
+  "clase": "Metamórfica",
+  "claseKey": "met",
+  "nombre": "Córnea",
+  "alias": [
+   "Córnea",
+   "Cornubianita",
+   "Corneana"
+  ],
+  "img": "fotos-final/met-cornea.jpg",
+  "imgs": [
+   "fotos-final/met-cornea.jpg"
+  ],
+  "subtipo": "No foliada · De contacto",
+  "estructura": "No foliada · Granoblástica",
+  "origen": "De contacto · No indicado",
+  "clasificacion": "Corneana de piroxeno / sanidinita",
+  "composicion": "Micas, Granate, Piroxeno, Cordierita, Andalucita, Cuarzo, Feldespato, Carbonato, Otros",
+  "analogo": "Areniscas, Basaltos, Calizas, Rocas pelíticas",
+  "diagnostico": [
+   "Aspecto masivo",
+   "fractura concoidea",
+   "alta dureza"
+  ],
+  "notas": [],
+  "factores": "Corneana de piroxeno: T alta a muy alta · P muy baja a baja. Sanidinita: T muy alta · P muy baja",
+  "gate": [
+   {
+    "label": "Micas",
+    "keys": [
+     "mica"
+    ]
+   },
+   {
+    "label": "Granate",
+    "keys": [
+     "granate"
+    ]
+   },
+   {
+    "label": "Piroxeno",
+    "keys": [
+     "piroxeno"
+    ]
+   },
+   {
+    "label": "Cordierita",
+    "keys": [
+     "cordierita"
+    ]
+   },
+   {
+    "label": "Andalucita",
+    "keys": [
+     "andalucita",
+     "quiastolita"
+    ]
+   },
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Feldespato",
+    "keys": [
+     "feldespato"
+    ]
+   },
+   {
+    "label": "Carbonato",
+    "keys": [
+     "carbonato",
+     "calcita"
+    ]
+   }
+  ],
+  "gateExtra": [],
+  "gateMin": 4,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "no foliada"
+    ],
+    [
+     "granoblast"
+    ]
+   ],
+   "origen": [
+    [
+     "contacto"
+    ],
+    [
+     "no indicado",
+     "no se indica",
+     "no aplica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "corneana",
+     "sanidinita",
+     "piroxeno"
+    ]
+   ],
+   "analogo": [
+    [
+     "areniscas",
+     "areni"
+    ],
+    [
+     "basaltos",
+     "basal"
+    ],
+    [
+     "calizas",
+     "caliz"
+    ],
+    [
+     "peliticas",
+     "pelit"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "met-cuarcita",
+  "clase": "Metamórfica",
+  "claseKey": "met",
+  "nombre": "Cuarcita",
+  "alias": [
+   "Cuarcita"
+  ],
+  "img": "fotos-final/met-cuarcita.jpg",
+  "imgs": [
+   "fotos-final/met-cuarcita.jpg"
+  ],
+  "subtipo": "No foliada · De contacto",
+  "estructura": "No foliada · Granoblástica",
+  "origen": "De contacto · No indicado",
+  "clasificacion": "Anfibolita",
+  "composicion": "Cuarzo, Granate, Micas",
+  "analogo": "Areniscas, Pedernal, Cuarzoarenita",
+  "diagnostico": [
+   "Presencia de cuarzo",
+   "alta dureza",
+   "textura granoblástica"
+  ],
+  "notas": [],
+  "factores": "T intermedia a alta · P intermedia",
+  "gate": [
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Granate",
+    "keys": [
+     "granate"
+    ]
+   },
+   {
+    "label": "Micas",
+    "keys": [
+     "mica"
+    ]
+   }
+  ],
+  "gateExtra": [],
+  "gateMin": 2,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "no foliada"
+    ],
+    [
+     "granoblast"
+    ]
+   ],
+   "origen": [
+    [
+     "contacto"
+    ],
+    [
+     "no indicado",
+     "no se indica",
+     "no aplica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "anfibolita",
+     "anfibol"
+    ]
+   ],
+   "analogo": [
+    [
+     "areniscas",
+     "areni"
+    ],
+    [
+     "pedernal",
+     "peder"
+    ],
+    [
+     "cuarzoarenita",
+     "cuarz"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "met-skarn",
+  "clase": "Metamórfica",
+  "claseKey": "met",
+  "nombre": "Skarn",
+  "alias": [
+   "Skarn",
+   "Escarn"
+  ],
+  "img": "fotos-final/met-skarn.jpg",
+  "imgs": [
+   "fotos-final/met-skarn.jpg"
+  ],
+  "subtipo": "No foliada · Metasomatismo",
+  "estructura": "No foliada · Granoblástica",
+  "origen": "Metasomatismo · No indicado",
+  "clasificacion": "Ninguna",
+  "composicion": "Granate, Wollastonita, Diópsido",
+  "analogo": "Basalto, Gabro, Toba",
+  "diagnostico": [
+   "Presencia de minerales calcosilicatados",
+   "alta dureza",
+   "textura granoblástica"
+  ],
+  "notas": [],
+  "factores": "No indicado",
+  "gate": [
+   {
+    "label": "Granate",
+    "keys": [
+     "granate"
+    ]
+   },
+   {
+    "label": "Wollastonita",
+    "keys": [
+     "wollastonita"
+    ]
+   },
+   {
+    "label": "Diópsido",
+    "keys": [
+     "diopsido",
+     "piroxeno"
+    ]
+   }
+  ],
+  "gateExtra": [],
+  "gateMin": 2,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "no foliada"
+    ],
+    [
+     "granoblast"
+    ]
+   ],
+   "origen": [
+    [
+     "metasomat"
+    ],
+    [
+     "no indicado",
+     "no se indica",
+     "no aplica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "no indicada",
+     "no aplica",
+     "ninguna",
+     "sin facie"
+    ]
+   ],
+   "analogo": [
+    [
+     "basalto",
+     "basal"
+    ],
+    [
+     "gabro"
+    ],
+    [
+     "toba"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "met-anfibolita",
+  "clase": "Metamórfica",
+  "claseKey": "met",
+  "nombre": "Anfibolita",
+  "alias": [
+   "Anfibolita"
+  ],
+  "img": "fotos-final/met-anfibolita.jpg",
+  "imgs": [
+   "fotos-final/met-anfibolita.jpg"
+  ],
+  "subtipo": "No foliada · No indicado",
+  "estructura": "No foliada · Granoblástica",
+  "origen": "No indicado · Medio grado",
+  "clasificacion": "Anfibolita",
+  "composicion": "Anfíbol, Plagioclasa",
+  "analogo": "Basalto, Gabro, Toba",
+  "diagnostico": [
+   "Presencia de anfíbol",
+   "color negro o gris oscuro",
+   "textura granoblástica"
+  ],
+  "notas": [],
+  "factores": "T intermedia a alta · P intermedia",
+  "gate": [
+   {
+    "label": "Anfíbol",
+    "keys": [
+     "anfibol",
+     "hornblenda"
+    ]
+   },
+   {
+    "label": "Plagioclasa",
+    "keys": [
+     "plagioclasa"
+    ]
+   }
+  ],
+  "gateExtra": [],
+  "gateMin": 2,
+  "gateMust": [
+   [
+    "anfibol"
+   ]
+  ],
+  "check": {
+   "estructura": [
+    [
+     "no foliada"
+    ],
+    [
+     "granoblast"
+    ]
+   ],
+   "origen": [
+    [
+     "no indicado",
+     "no se indica",
+     "no aplica"
+    ],
+    [
+     "medio"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "anfibolita",
+     "anfibol"
+    ]
+   ],
+   "analogo": [
+    [
+     "basalto",
+     "basal"
+    ],
+    [
+     "gabro"
+    ],
+    [
+     "toba"
+    ]
+   ]
+  }
+ },
+ {
+  "id": "met-milonita",
+  "clase": "Metamórfica",
+  "claseKey": "met",
+  "nombre": "Milonita",
+  "alias": [
+   "Milonita"
+  ],
+  "img": "fotos-final/met-milonita.jpg",
+  "imgs": [
+   "fotos-final/met-milonita.jpg"
+  ],
+  "subtipo": "Cataclástica · De dislocación",
+  "estructura": "Cataclástica · Porfidoclástica, milonítica",
+  "origen": "De dislocación · No indicado",
+  "clasificacion": "No indicada",
+  "composicion": "Cuarzo, Feldespatos",
+  "analogo": "Cualquier clase de roca",
+  "diagnostico": [
+   "Minerales orientados",
+   "textura milonítica",
+   "bandas oscuras y negras"
+  ],
+  "notas": [
+   "Es la única con textura clástica (previa al metamorfismo)."
+  ],
+  "factores": "No indicado",
+  "gate": [
+   {
+    "label": "Cuarzo",
+    "keys": [
+     "cuarzo",
+     "qz"
+    ]
+   },
+   {
+    "label": "Feldespatos",
+    "keys": [
+     "feldespato"
+    ]
+   }
+  ],
+  "gateExtra": [],
+  "gateMin": 2,
+  "gateMust": [],
+  "check": {
+   "estructura": [
+    [
+     "cataclastic",
+     "cataclasi",
+     "milonit"
+    ],
+    [
+     "porfidoclast",
+     "milonit"
+    ]
+   ],
+   "origen": [
+    [
+     "dislocacion",
+     "dinamico",
+     "cataclastic"
+    ],
+    [
+     "no indicado",
+     "no se indica",
+     "no aplica"
+    ]
+   ],
+   "clasificacion": [
+    [
+     "no indicada",
+     "no aplica",
+     "ninguna",
+     "sin facie"
+    ]
+   ],
+   "analogo": [
+    [
+     "roca"
+    ]
+   ]
+  }
+ }
+];
+const BY = Object.fromEntries(ROCKS.map(r => [r.id, r]));
+const CLASS_LABEL = {ig:'Ígneas', sed:'Sedimentarias', met:'Metamórficas'};
+const MODES = [
+  ['mix', 'Mezcla por tipos'],
+  ['ig',  'Solo ígneas'],
+  ['sed', 'Solo sedimentarias'],
+  ['met', 'Solo metamórficas']
+];
+const FIELDS = [
+  ['name',          'NOMBRE'],
+  ['comp',          'MINERALES / COMPOSICIÓN'],
+  ['clase',         'CLASE DE RXS'],
+  ['estructura',    'ESTRUCTURA / TEXTURA'],
+  ['origen',        'ORIGEN / TIPO / GRADO'],
+  ['clasificacion', 'CLASIFICACIÓN'],
+  ['analogo',       'ANÁLOGO / PROTOLITO / SEDIMENTO'],
+  ['diagnostico',   'MÉTODO DE DIAGNÓSTICO']
+];
+const AUTO_FIELDS = ['clase','estructura','origen','clasificacion','analogo'];
+
+/* ============================================================
+   UTILIDADES
+   ============================================================ */
+const $  = (s, el=document) => el.querySelector(s);
+const $$ = (s, el=document) => [...el.querySelectorAll(s)];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const escRe = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const norm = s => String(s ?? '').toLowerCase().normalize('NFD')
+  .replace(/[\u0300-\u036f]/g, '').replace(/ñ/g, 'n')
+  .replace(/[^a-z0-9]+/g, ' ').replace(/\s+/g, ' ').trim();
+const shuffle = a => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+};
+
+function tokenMatch(hay, key) {
+  hay = norm(hay); key = norm(key);
+  if (!key) return false;
+  if (key.includes(' ')) return hay.includes(key);
+  // Las claves de 5+ letras son raíces (granoblast, lepidoblast, arcil, cuarz…):
+  // se aceptan sus derivados (granoblástica, arcillosa, cuarzosa…).
+  if (key.length >= 5) {
+    const stem = new RegExp('(^|[^a-z0-9])' + escRe(key));
+    return stem.test(hay);
+  }
+  const re = new RegExp('(^|[^a-z0-9])' + escRe(key) + '(s)?([^a-z0-9]|$)');
+  return re.test(hay);
+}
+function hasAny(input, keys) { return (keys || []).some(k => tokenMatch(input, k)); }
+function listOK(input, groups, frac) {
+  if (!groups || !groups.length) return norm(input).length > 0;
+  const hits = groups.filter(g => hasAny(input, g)).length;
+  const need = Math.max(1, Math.ceil(groups.length * (frac ?? 0.5)));
+  return hits >= need;
+}
+function splitDiag(s) {
+  s = String(s || '').trim();
+  if (!s) return [];
+  let parts = s.split(/\n|;|·|•|\u2022/).map(x => x.trim()).filter(Boolean);
+  if (parts.length < 3) parts = s.split(/,/).map(x => x.trim()).filter(Boolean);
+  return parts;
+}
+function diagCount(s) { return splitDiag(s).length; }
+
+/* ============================================================
+   CORRECCIÓN
+   ============================================================ */
+function nameOK(input, r) {
+  const n = norm(input);
+  if (!n) return false;
+  const candidates = [n, n.replace(/^roca\s+/, ''), n.replace(/^muestra\s+/, '')];
+  return candidates.some(c => r.alias.some(a => norm(a) === c));
+}
+function compOK(input, r) {
+  const n = norm(input);
+  if (!n) return false;
+  const items = [...(r.gate || []), ...(r.gateExtra || [])];
+  let hits = 0;
+  for (const it of items) if (hasAny(n, it.keys)) hits++;
+  if (hits < (r.gateMin || 1)) return false;
+  for (const must of (r.gateMust || [])) if (!hasAny(n, must)) return false;
+  return true;
+}
+function claseOK(input, r) {
+  const n = norm(input);
+  const map = {
+    ig: ['ignea','igneas','igneo','igneos'],
+    sed: ['sedimentaria','sedimentarias','sedimentario','sedimentarios'],
+    met: ['metamorfica','metamorficas','metamorfico','metamorficos']
+  };
+  return (map[r.claseKey] || []).some(x => n === x || tokenMatch(n, x));
+}
+function checkEstructura(r, input) {
+  const n = norm(input);
+  if (!n) return false;
+  if (r.claseKey === 'met') {
+    const grupo = r.check.estructura[0], textura = r.check.estructura[1];
+    if (r.estructura.startsWith('Foliada') && /(^|\s)no\s+foliad/.test(n)) return false;
+    return hasAny(n, grupo) && hasAny(n, textura);
+  }
+  return hasAny(n, r.check.estructura[0]);
+}
+function tipoOK(input, tipo, keys) {
+  const n = norm(input), t = norm(tipo);
+  // Si el tipo no está indicado, no se exige: solo se evalúa el grado.
+  if (/^no indicado/.test(t)) return true;
+  return hasAny(n, keys);
+}
+function gradoOK(input, grado) {
+  const n = norm(input), g = norm(grado);
+  // Cuando la roca no tiene grado indicado, no se exige escribirlo:
+  // basta con acertar el tipo de metamorfismo.
+  if (/^no indicado/.test(g)) return true;
+  if (/^medio alto/.test(g)) return /(^|\s)medio\s*-?\s*alto(\s|$)/.test(n) || /medioalto/.test(n);
+  if (/^medio/.test(g)) return /(^|\s)medio(\s|$)/.test(n) && !/medio\s*-?\s*alto/.test(n);
+  if (/^bajo/.test(g)) return /(^|\s)bajo(\s|$)/.test(n);
+  if (/^alto/.test(g)) return /(^|\s)alto(\s|$)/.test(n) && !/medio\s*-?\s*alto/.test(n);
+  return tokenMatch(n, g);
+}
+function checkOrigen(r, input) {
+  const n = norm(input);
+  if (!n) return false;
+  if (r.claseKey !== 'met') return hasAny(n, r.check.origen[0]);
+  const parts = r.origen.split(' · ');
+  const tipo = parts[0] || '';
+  const grado = parts[1] || '';
+  return tipoOK(n, tipo, r.check.origen[0]) && gradoOK(n, grado);
+}
+function checkClasificacion(r, input) {
+  const n = norm(input);
+  if (!n) return false;
+  if (r.claseKey === 'sed') {
+    if (r.clasificacion === 'Detrítica' && /(^|\s)no\s+detrit/.test(n)) return false;
+    if (r.clasificacion === 'Química' && /bioquim/.test(n)) return false;
+  }
+  return hasAny(n, r.check.clasificacion[0]);
+}
+function checkAnalogo(r, input) {
+  const n = norm(input);
+  if (r.claseKey === 'ig') {
+    return !n || hasAny(n, ['no aplica','no corresponde','ninguno','ninguna','sin analogo']) || n === 'no';
+  }
+  if (r.claseKey === 'sed') return listOK(n, r.check.analogo, 0);
+  return listOK(n, r.check.analogo, 0.5);
+}
+function autoCheck(key, r, input) {
+  switch (key) {
+    case 'name': return nameOK(input, r);
+    case 'comp': return compOK(input, r);
+    case 'clase': return claseOK(input, r);
+    case 'estructura': return checkEstructura(r, input);
+    case 'origen': return checkOrigen(r, input);
+    case 'clasificacion': return checkClasificacion(r, input);
+    case 'analogo': return checkAnalogo(r, input);
+  }
+  return null;
+}
+function rockScore(res) {
+  if (!res.gate) return 0;
+  return FIELDS.filter(([k]) => res.v[k] === true).length / FIELDS.length;
+}
+
+/* ============================================================
+   TEMA + NAVEGACIÓN
+   ============================================================ */
+const savedTheme = store.get('tf_theme', null);
+if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+const TABS = [['test','Test final'],['estudiar','Estudiar'],['tabla','Tabla'],['guia','Guía']];
+let view = 'test';
+function renderTabs() {
+  $('#tabs').innerHTML = TABS.map(([k,t]) => `<button role="tab" aria-selected="${k===view}" data-act="tab" data-v="${k}">${t}</button>`).join('');
+}
+function go(v) {
+  view = v; renderTabs();
+  ({test:vTest, estudiar:vEstudiar, tabla:vTabla, guia:vGuia})[v]();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+/* ============================================================
+   TEST
+   ============================================================ */
+let T = null;
+const DEFAULT_MIX = {ig:4, sed:3, met:3};
+let cfg = {mode:'mix', mix:{...DEFAULT_MIX}};
+
+function mixTotal() { return cfg.mix.ig + cfg.mix.sed + cfg.mix.met; }
+function updateMixUI() {
+  const total = mixTotal();
+  const t = $('#mix-total');
+  if (t) t.textContent = total;
+  const wrap = $('#mix-total-wrap');
+  if (wrap) wrap.classList.toggle('bad', total !== 10);
+  const start = $('[data-act="start"][data-src="all"]');
+  if (start) start.disabled = cfg.mode === 'mix' && total !== 10;
+}
+function randomMix() {
+  const cuts = shuffle([1,2,3,4,5,6,7,8,9]).slice(0,2).sort((a,b)=>a-b);
+  cfg.mix = {ig:cuts[0], sed:cuts[1]-cuts[0], met:10-cuts[1]};
+  for (const k of ['ig','sed','met']) {
+    const el = $(`[data-mix="${k}"]`);
+    if (el) el.value = cfg.mix[k];
+  }
+  updateMixUI();
+}
+function vTest() {
+  if (!T) return testSetup();
+  if (T.i >= T.rocks.length) return testSummary();
+  testRock();
+}
+function pickRocks(src) {
+  if (src === 'missed') {
+    const ids = store.get('tf_missed', []);
+    return shuffle(ids.map(id => BY[id]).filter(Boolean)).slice(0, 10);
+  }
+  if (cfg.mode === 'mix') {
+    const pick = k => shuffle(ROCKS.filter(r => r.claseKey === k)).slice(0, cfg.mix[k]);
+    return shuffle([...pick('ig'), ...pick('sed'), ...pick('met')]);
+  }
+  return shuffle(ROCKS.filter(r => r.claseKey === cfg.mode)).slice(0, 10);
+}
+function startTest(src) {
+  if (src !== 'missed' && cfg.mode === 'mix' && mixTotal() !== 10) { updateMixUI(); return; }
+  const rocks = pickRocks(src);
+  if (!rocks.length) return;
+  T = {
+    rocks, i: 0, src, saved: false, mix: {...cfg.mix},
+    res: rocks.map(() => ({ans:{}, v:{}, c1:false, c2:false, gate:null}))
+  };
+  testRock();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function testSetup() {
+  const missed = store.get('tf_missed', []).filter(id => BY[id]);
+  const hist = store.get('tf_hist', []);
+  $('#main').innerHTML = `
+  <div class="stack narrow">
+    <div class="hero">
+      <div class="kicker">Simulacro final</div>
+      <h2>10 muestras. Primero la puerta: nombre y componentes.</h2>
+      <p>En cada muestra escribes el <b>nombre</b> y sus <b>componentes</b>. Solo si ambos están correctos se desbloquea el resto de la fila: clase, estructura/textura, origen/tipo/grado, clasificación, análogo/protolito/sedimento y método de diagnóstico. Si fallas la puerta, esa fila cuenta como <b>0</b>, igual que en el test de metamórficas.</p>
+      <div class="steps">
+        <div class="stepbox"><b>Paso 1</b><span>Reconoce la muestra y escribe nombre + componentes. Sin ayudas.</span></div>
+        <div class="stepbox"><b>Paso 2</b><span>Si pasas la puerta, completas las columnas del examen.</span></div>
+        <div class="stepbox"><b>Paso 3</b><span>Corriges, ves la fila correcta y pasas a la siguiente muestra.</span></div>
+      </div>
+    </div>
+
+    <div class="panel stack">
+      <h3>Elige el tipo de test</h3>
+      <div class="chips" role="radiogroup" aria-label="Tipo de test">
+        ${MODES.map(([m,label]) => `<button class="chip" data-act="mode" data-m="${m}" aria-pressed="${cfg.mode===m}">${label}</button>`).join('')}
+      </div>
+      ${cfg.mode === 'mix' ? `<div class="mix-picker">
+        <div class="mix-row">
+          <label>Ígneas <input type="number" inputmode="numeric" min="0" max="10" step="1" data-mix="ig" value="${cfg.mix.ig}" aria-label="Cantidad de ígneas"></label>
+          <label>Sedimentarias <input type="number" inputmode="numeric" min="0" max="10" step="1" data-mix="sed" value="${cfg.mix.sed}" aria-label="Cantidad de sedimentarias"></label>
+          <label>Metamórficas <input type="number" inputmode="numeric" min="0" max="10" step="1" data-mix="met" value="${cfg.mix.met}" aria-label="Cantidad de metamórficas"></label>
+        </div>
+        <div class="row between">
+          <span class="mix-total" id="mix-total-wrap">Total: <b id="mix-total">${mixTotal()}</b> / 10</span>
+          <button class="btn ghost sm" data-act="mix-random">Repartir al azar</button>
+        </div>
+        <p class="muted small" style="margin:0">Elige cuántas muestras de cada tipo quieres. Las rocas concretas se sortean dentro de cada grupo; el total debe ser 10.</p>
+      </div>` : `<p class="muted small" style="margin:0">Se eligen 10 rocas al azar de ese grupo.</p>`}
+      <div class="row">
+        <button class="btn" data-act="start" data-src="all" ${cfg.mode === 'mix' && mixTotal() !== 10 ? 'disabled' : ''}>Empezar test</button>
+        ${missed.length ? `<button class="btn ghost" data-act="start" data-src="missed">Repasar falladas (${missed.length})</button>` : ''}
+      </div>
+    </div>
+
+    ${hist.length ? `<div class="panel">
+      <h3>Últimos resultados</h3>
+      <div class="muted small" style="font-family:var(--f-mono);line-height:1.8">
+        ${hist.slice(-6).reverse().map(h => `${esc(h.d)} · ${esc(h.mode)} · ${h.pct}% · puerta ${h.gates}/${h.total}`).join('<br>')}
+      </div>
+    </div>` : ''}
+  </div>`;
+}
+
+function testRock() {
+  const i = T.i, r = T.rocks[i], res = T.res[i], total = T.rocks.length;
+  const pct = Math.round(i / total * 100);
+  const gatePass = res.c1 && res.gate;
+  const gateFail = res.c1 && !res.gate;
+  $('#main').innerHTML = `
+  <div class="stack test-wrap">
+    <div class="test-head">
+      <div class="test-line">
+        <span class="step-label">Muestra ${i+1} de ${total}</span>
+        <span class="muted small">${T.src === 'missed' ? 'Repaso de falladas' : 'Test final'}</span>
+      </div>
+      <div class="progress"><i style="width:${pct}%"></i></div>
+    </div>
+
+    <div class="exam-grid">
+      <div class="photo-col">
+        <figure class="sample-photo">
+          <img src="${esc(r.img)}" alt="Muestra de mano ${i+1}" data-act="zoom" data-src="${esc(r.img)}">
+          <figcaption>Muestra de mano · observa textura, grano, color, brillo, foliación, porosidad y dureza</figcaption>
+        </figure>
+        <div class="photo-hint">La imagen no tiene el nombre impreso. No se revela el tipo de roca antes de la puerta.</div>
+      </div>
+
+      <div class="stack">
+        <div class="panel gate-panel">
+          <div class="panel-head">
+            <div class="num">1</div>
+            <div>
+              <h3>Identificación · puerta</h3>
+              <p class="muted small" style="margin:0">Nombre + componentes. Si fallas, esta fila completa vale 0.</p>
+            </div>
+          </div>
+          ${res.c1 ? gateResult(r, res) : gateForm(i, r, res)}
+        </div>
+
+        ${gatePass ? `<div class="panel">
+          <div class="panel-head">
+            <div class="num two">2</div>
+            <div>
+              <h3>Resto de la tabla</h3>
+              <p class="muted small" style="margin:0">Puerta superada. Completa las columnas del examen; el método de diagnóstico pide mínimo 3 rasgos.</p>
+            </div>
+          </div>
+          ${tableForm(i, r, res)}
+        </div>` : ''}
+
+        ${gateFail ? `<div class="panel">
+          <h3>Así era la fila completa</h3>
+          <p class="muted small">No pasaste la puerta: esta fila cuenta como 0. Revisa la respuesta y sigue con la próxima muestra.</p>
+          ${correctRow(r)}
+          <div class="row end" style="margin-top:12px"><button class="btn" data-act="next">${i+1 < total ? 'Siguiente muestra' : 'Ver resultado'}</button></div>
+        </div>` : ''}
+
+        ${gatePass && res.c2 ? `<div class="score-line">
+          <span class="muted">Puntaje de esta roca: <b>${Math.round(rockScore(res)*100)}%</b></span>
+          <button class="btn" data-act="next">${i+1 < total ? 'Siguiente muestra' : 'Ver resultado'}</button>
+        </div>` : ''}
+      </div>
+    </div>
+  </div>`;
+}
+
+function gateForm(i, r, res) {
+  return `<div class="stack">
+    <label class="field">
+      <span class="lb">Nombre de la roca</span>
+      <input type="text" data-k="name" value="${esc(res.ans.name||'')}" placeholder="Ej: Granito, Caliza, Esquisto de mica" autocomplete="off" spellcheck="false">
+    </label>
+    <label class="field">
+      <span class="lb">Componentes / minerales esenciales</span>
+      <textarea data-k="comp" placeholder="Sepáralos con coma. Ej: cuarzo, feldespato alcalino, plagioclasa, mica">${esc(res.ans.comp||'')}</textarea>
+      <span class="hint">Para las sedimentarias puedes escribir el componente principal (calcita, arcilla, cuarzo, halita…) o el conjunto.</span>
+    </label>
+    <div class="row between">
+      <span class="muted small">La puerta no se puede reintentar.</span>
+      <button class="btn" data-act="check1">Comprobar identificación</button>
+    </div>
+  </div>`;
+}
+
+function gateResult(r, res) {
+  const nameOk = res.v.name === true, compOk = res.v.comp === true;
+  const pass = nameOk && compOk;
+  return `<div class="verdict-list">
+    <div class="verdict ${nameOk?'ok':'bad'}">
+      <b>${nameOk?'✓':'✗'}</b>
+      <div class="body">
+        <span>Nombre</span>
+        ${!nameOk ? `<span class="mine">Tu respuesta: ${res.ans.name ? esc(res.ans.name) : '<i>vacío</i>'}</span>` : ''}
+        <span class="ans"><b>Correcto:</b> ${esc(r.nombre)}</span>
+      </div>
+    </div>
+    <div class="verdict ${compOk?'ok':'bad'}">
+      <b>${compOk?'✓':'✗'}</b>
+      <div class="body">
+        <span>Componentes</span>
+        ${!compOk ? `<span class="mine">Tu respuesta: ${res.ans.comp ? esc(res.ans.comp) : '<i>vacío</i>'}</span>` : ''}
+        <span class="ans"><b>Componentes principales:</b> ${esc(r.gate.map(g => g.label).join(', '))}</span>
+        <span class="ans"><b>Composición completa:</b> ${esc(r.composicion)}</span>
+      </div>
+    </div>
+  </div>
+  <div class="gate-msg ${pass?'pass':''}">
+    ${pass
+      ? '<b>Puerta superada.</b> Se desbloquea el resto de la tabla.'
+      : '<b>No pasaste la puerta.</b> En el examen esta fila completa cuenta como 0.'}
+  </div>`;
+}
+
+function tableForm(i, r, res) {
+  const comp = res.ans.comp || '';
+  if (res.c2) {
+    return `<div class="table-form">
+      <div class="field locked">
+        <span class="lb">MINERALES / COMPOSICIÓN</span>
+        <div class="locked-box"><b>✓</b><span>${esc(comp)}<br><span class="muted small">Validado en la puerta. Composición completa: ${esc(r.composicion)}</span></span></div>
+      </div>
+      ${AUTO_FIELDS.map(k => fieldVerdict(k, r, res)).join('')}
+      ${diagVerdict(r, res)}
+    </div>`;
+  }
+  return `<div class="table-form">
+    <div class="field locked">
+      <span class="lb">MINERALES / COMPOSICIÓN</span>
+      <div class="locked-box"><b>✓</b><span>${esc(comp)}<br><span class="muted small">Validado en la puerta.</span></span></div>
+    </div>
+
+    <label class="field">
+      <span class="lb">CLASE DE RXS</span>
+      <select data-k="clase">
+        <option value="">— elige —</option>
+        <option ${res.ans.clase==='Ígnea'?'selected':''}>Ígnea</option>
+        <option ${res.ans.clase==='Sedimentaria'?'selected':''}>Sedimentaria</option>
+        <option ${res.ans.clase==='Metamórfica'?'selected':''}>Metamórfica</option>
+      </select>
+    </label>
+
+    <label class="field">
+      <span class="lb">ESTRUCTURA / TEXTURA</span>
+      <input type="text" data-k="estructura" value="${esc(res.ans.estructura||'')}" placeholder="Ej: Fanerítica equigranular · Clástica / Pelita · Foliada · Lepidoblástica" autocomplete="off">
+    </label>
+
+    <label class="field">
+      <span class="lb">ORIGEN / TIPO / GRADO</span>
+      <input type="text" data-k="origen" value="${esc(res.ans.origen||'')}" placeholder="Ej: Plutónico · Mecánico · Regional · Bajo grado" autocomplete="off">
+    </label>
+
+    <label class="field">
+      <span class="lb">CLASIFICACIÓN</span>
+      <input type="text" data-k="clasificacion" value="${esc(res.ans.clasificacion||'')}" placeholder="Ej: Ácida · Detrítica · Esquistos verdes" autocomplete="off">
+    </label>
+
+    <label class="field">
+      <span class="lb">ANÁLOGO / PROTOLITO / SEDIMENTO</span>
+      <input type="text" data-k="analogo" value="${esc(res.ans.analogo||'')}" placeholder="Ej: No aplica · Arena · Caliza" autocomplete="off">
+    </label>
+
+    <label class="field">
+      <span class="lb">MÉTODO DE DIAGNÓSTICO (mín. 3)</span>
+      <textarea data-k="diagnostico" placeholder="Escribe al menos 3 rasgos separados por punto y coma. Ej: brillo escaso; textura laminar; foliación poco penetrativa">${esc(res.ans.diagnostico||'')}</textarea>
+      <span class="diag-meter"><span id="diag-count">${diagCount(res.ans.diagnostico||'')}/3 rasgos</span><span id="diag-warn" class="${diagCount(res.ans.diagnostico||'')>=3?'ok':'short'}">${diagCount(res.ans.diagnostico||'')>=3?'mínimo cumplido':'faltan rasgos'}</span></span>
+    </label>
+
+    <div class="row end">
+      <button class="btn" data-act="check2">Corregir tabla</button>
+    </div>
+  </div>`;
+}
+
+function fieldVerdict(k, r, res) {
+  const label = FIELDS.find(f => f[0] === k)[1];
+  const v = res.v[k];
+  const cls = v === true ? 'ok' : v === false ? 'bad' : 'pend';
+  const sym = v === true ? '✓' : v === false ? '✗' : '?';
+  const answer = r[k] || '—';
+  return `<div class="field">
+    <span class="lb">${label}</span>
+    <div class="verdict ${cls}">
+      <b>${sym}</b>
+      <div class="body">
+        <span>Tu respuesta: ${res.ans[k] ? esc(res.ans[k]) : '<i>vacío</i>'}</span>
+        <span class="ans"><b>Correcta:</b> ${esc(answer)}</span>
+        <button class="btn ghost sm" data-act="mark" data-k="${k}" data-v="${v === true ? '0' : '1'}" style="margin-top:6px">${v === true ? 'Marcar como incorrecta' : 'Marcar como correcta'}</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function diagVerdict(r, res) {
+  const v = res.v.diagnostico;
+  const cls = v === true ? 'ok' : v === false ? 'bad' : 'pend';
+  const sym = v === true ? '✓' : v === false ? '✗' : '?';
+  return `<div class="field">
+    <span class="lb">MÉTODO DE DIAGNÓSTICO (mín. 3)</span>
+    <div class="verdict ${cls}">
+      <b>${sym}</b>
+      <div class="body">
+        <span>Tu respuesta: ${res.ans.diagnostico ? esc(res.ans.diagnostico) : '<i>vacío</i>'}</span>
+        <span class="ans"><b>Correcta:</b></span>
+        <ul class="diag-list">${r.diagnostico.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+        <div class="row" style="margin-top:6px">
+          <button class="btn sm ${v === true ? '' : 'ghost'}" data-act="mark" data-k="diagnostico" data-v="1">Lo tenía</button>
+          <button class="btn sm ${v === false ? '' : 'ghost'}" data-act="mark" data-k="diagnostico" data-v="0">No lo tenía</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function correctRow(r) {
+  const rows = [
+    ['NOMBRE', r.nombre],
+    ['CLASE DE RXS', r.clase],
+    ['ESTRUCTURA / TEXTURA', r.estructura],
+    ['ORIGEN / TIPO / GRADO', r.origen],
+    ['CLASIFICACIÓN', r.clasificacion],
+    ['MINERALES / COMPOSICIÓN', r.composicion],
+    ['ANÁLOGO / PROTOLITO / SEDIMENTO', r.analogo],
+    ['MÉTODO DE DIAGNÓSTICO (mín. 3)', null]
+  ];
+  return `<dl class="spec">
+    ${rows.map(([k,v]) => `<dt>${k}</dt><dd>${v === null
+      ? `<ul class="diag-list">${r.diagnostico.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`
+      : esc(v)}</dd>`).join('')}
+  </dl>`;
+}
+
+function checkGate() {
+  const i = T.i, r = T.rocks[i], res = T.res[i];
+  const nameOk = nameOK(res.ans.name || '', r);
+  const compOk = compOK(res.ans.comp || '', r);
+  res.c1 = true;
+  res.gate = nameOk && compOk;
+  res.v.name = nameOk;
+  res.v.comp = compOk;
+  testRock();
+}
+function checkTable() {
+  const i = T.i, r = T.rocks[i], res = T.res[i];
+  if (diagCount(res.ans.diagnostico || '') < 3) {
+    const w = $('#diag-warn');
+    if (w) { w.className = 'short'; w.textContent = 'escribe al menos 3 rasgos'; }
+    return;
+  }
+  for (const k of AUTO_FIELDS) res.v[k] = autoCheck(k, r, res.ans[k] || '');
+  res.v.diagnostico = null;
+  res.c2 = true;
+  testRock();
+}
+
+function testSummary() {
+  const scores = T.res.map(rockScore);
+  const pct = Math.round(scores.reduce((a,b) => a+b, 0) / scores.length * 100);
+  const gates = T.res.filter(x => x.gate).length;
+  const points = T.res.reduce((a,res) => a + (res.gate ? FIELDS.filter(([k]) => res.v[k] === true).length : 0), 0);
+  const max = T.rocks.length * FIELDS.length;
+  const missed = T.rocks.filter((r,i) => !T.res[i].gate || rockScore(T.res[i]) < 0.7).map(r => r.id);
+  if (!T.saved) {
+    T.saved = true;
+    const h = store.get('tf_hist', []);
+    h.push({
+      d: new Date().toLocaleDateString('es-CL', {day:'2-digit', month:'2-digit'}),
+      mode: cfg.mode === 'mix'
+        ? `Mezcla ${T.mix.ig}+${T.mix.sed}+${T.mix.met}`
+        : (MODES.find(([m]) => m === cfg.mode) || ['',''])[1],
+      pct, gates, total: T.rocks.length
+    });
+    store.set('tf_hist', h.slice(-20));
+    store.set('tf_missed', [...new Set(missed)]);
+  }
+  $('#main').innerHTML = `
+  <div class="stack narrow">
+    <div class="panel stack">
+      <div class="kicker">Resultado del test final</div>
+      <div style="font:700 54px/1 var(--f-head)">${pct}%</div>
+      <p style="margin:0">Puertas superadas: <b>${gates} de ${T.rocks.length}</b>. Puntaje: <b>${points}/${max}</b>. Las filas con puerta fallada cuentan 0.</p>
+      <div class="row">
+        <button class="btn" data-act="start" data-src="all">Nuevo test</button>
+        ${missed.length ? `<button class="btn ghost" data-act="start" data-src="missed">Repasar falladas (${missed.length})</button>` : ''}
+        <button class="btn ghost" data-act="reset">Cambiar modo</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>Detalle por muestra</h3>
+      <div class="tbl-wrap" style="max-height:none">
+        <table class="tbl-small">
+          <tr><th>#</th><th>Roca</th><th>Puerta</th><th>Puntaje</th></tr>
+          ${T.rocks.map((r,i) => {
+            const res = T.res[i], sc = Math.round(rockScore(res)*100);
+            return `<tr>
+              <td>${i+1}</td>
+              <td><a href="#" data-act="ficha" data-id="${r.id}" style="color:var(--accent)">${esc(r.nombre)}</a></td>
+              <td>${res.gate ? '✓' : '✗'}</td>
+              <td>${sc}%</td>
+            </tr>`;
+          }).join('')}
+        </table>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ============================================================
+   ESTUDIAR
+   ============================================================ */
+let study = {filter:'all', q:'', hide:false};
+function studyList() {
+  const q = norm(study.q);
+  return ROCKS.filter(r =>
+    (study.filter === 'all' || r.claseKey === study.filter) &&
+    (!q || norm([r.nombre, ...r.alias, r.subtipo, r.estructura, r.origen, r.clasificacion, r.composicion, r.analogo, ...r.diagnostico].join(' ')).includes(q))
+  );
+}
+function vEstudiar() {
+  const list = studyList();
+  $('#main').innerHTML = `
+  <div class="study-head">
+    <div>
+      <h2>Fichas de estudio</h2>
+      <p class="muted" style="margin:0">Las 63 rocas de las tres tablas. Haz clic en una ficha para ver la fila completa del examen.</p>
+    </div>
+    <div class="study-tools">
+      <input type="search" id="study-q" value="${esc(study.q)}" placeholder="Buscar roca, mineral, textura…" aria-label="Buscar en fichas">
+      <button class="chip" data-act="study-hide" aria-pressed="${study.hide}">${study.hide ? 'Mostrar nombres' : 'Ocultar nombres'}</button>
+    </div>
+    <div class="row">
+      <div class="chips" role="group" aria-label="Filtrar por clase">
+        ${[['all','Todas',ROCKS.length],['ig','Ígneas',ROCKS.filter(r=>r.claseKey==='ig').length],['sed','Sedimentarias',ROCKS.filter(r=>r.claseKey==='sed').length],['met','Metamórficas',ROCKS.filter(r=>r.claseKey==='met').length]].map(([k,l,n]) =>
+          `<button class="chip" data-act="study-filter" data-f="${k}" aria-pressed="${study.filter===k}">${l} · ${n}</button>`).join('')}
+      </div>
+      <span class="count-line" id="study-count">${list.length} rocas</span>
+    </div>
+  </div>
+  <div class="rock-grid" id="study-grid">${list.map(studyCard).join('')}</div>
+  <div class="empty" id="study-empty" ${list.length ? 'hidden' : ''}>No hay rocas que coincidan con la búsqueda.</div>`;
+}
+function studyCard(r) {
+  return `<button class="rock-card" data-act="ficha" data-id="${r.id}">
+    <img src="${esc(r.img)}" alt="${study.hide ? 'Muestra de roca' : esc(r.nombre)}" loading="lazy">
+    <div class="rock-meta">
+      <span class="tag ${r.claseKey}">${r.clase}</span>
+      <b>${study.hide ? 'Muestra ?' : esc(r.nombre)}</b>
+      <span class="muted small">${esc(r.subtipo)}</span>
+    </div>
+  </button>`;
+}
+function renderStudyGrid() {
+  const list = studyList();
+  const grid = $('#study-grid');
+  if (!grid) return;
+  grid.innerHTML = list.map(studyCard).join('');
+  const count = $('#study-count');
+  if (count) count.textContent = `${list.length} rocas`;
+  const empty = $('#study-empty');
+  if (empty) empty.hidden = list.length > 0;
+}
+
+/* ============================================================
+   TABLA
+   ============================================================ */
+let table = {filter:'all', q:''};
+function tableList() {
+  const q = norm(table.q);
+  return ROCKS.filter(r =>
+    (table.filter === 'all' || r.claseKey === table.filter) &&
+    (!q || norm([r.nombre, ...r.alias, r.clase, r.subtipo, r.estructura, r.origen, r.clasificacion, r.composicion, r.analogo, ...r.diagnostico].join(' ')).includes(q))
+  );
+}
+function vTabla() {
+  const list = tableList();
+  $('#main').innerHTML = `
+  <div class="study-head">
+    <div>
+      <h2>Tabla completa</h2>
+      <p class="muted" style="margin:0">Las 63 rocas con las columnas del examen final. La columna de origen de las sedimentarias ya está corregida.</p>
+    </div>
+    <div class="study-tools">
+      <input type="search" id="table-q" value="${esc(table.q)}" placeholder="Buscar en la tabla…" aria-label="Buscar en la tabla">
+      <button class="chip" data-act="csv">Descargar CSV</button>
+    </div>
+    <div class="row">
+      <div class="chips" role="group" aria-label="Filtrar por clase">
+        ${[['all','Todas',ROCKS.length],['ig','Ígneas',ROCKS.filter(r=>r.claseKey==='ig').length],['sed','Sedimentarias',ROCKS.filter(r=>r.claseKey==='sed').length],['met','Metamórficas',ROCKS.filter(r=>r.claseKey==='met').length]].map(([k,l,n]) =>
+          `<button class="chip" data-act="table-filter" data-f="${k}" aria-pressed="${table.filter===k}">${l} · ${n}</button>`).join('')}
+      </div>
+      <span class="count-line" id="table-count">${list.length} rocas</span>
+    </div>
+  </div>
+  <div class="tbl-wrap">
+    <table class="big">
+      <thead><tr>
+        <th>NOMBRE</th><th>CLASE DE RXS</th><th>ESTRUCTURA / TEXTURA</th><th>ORIGEN / TIPO / GRADO</th><th>CLASIFICACIÓN</th><th>MINERALES / COMPOSICIÓN</th><th>ANÁLOGO / PROTOLITO / SEDIMENTO</th><th>MÉTODO DE DIAGNÓSTICO</th>
+      </tr></thead>
+      <tbody id="table-body">${list.map(tableRow).join('')}</tbody>
+    </table>
+  </div>`;
+}
+function tableRow(r) {
+  return `<tr>
+    <td><div class="t-name"><img src="${esc(r.img)}" alt="" loading="lazy"><div><b>${esc(r.nombre)}</b><span>${esc(r.subtipo)}</span></div></div></td>
+    <td><span class="tag ${r.claseKey}">${r.clase}</span></td>
+    <td>${esc(r.estructura)}</td>
+    <td>${esc(r.origen)}</td>
+    <td>${esc(r.clasificacion)}</td>
+    <td>${esc(r.composicion)}</td>
+    <td>${esc(r.analogo)}</td>
+    <td>${r.diagnostico.map(esc).join('; ')}</td>
+  </tr>`;
+}
+function renderTableRows() {
+  const list = tableList();
+  const body = $('#table-body');
+  if (!body) return;
+  body.innerHTML = list.map(tableRow).join('');
+  const count = $('#table-count');
+  if (count) count.textContent = `${list.length} rocas`;
+}
+function downloadCSV() {
+  const list = tableList();
+  const headers = ['NOMBRE','CLASE DE RXS','ESTRUCTURA / TEXTURA','ORIGEN / TIPO / GRADO','CLASIFICACIÓN','MINERALES / COMPOSICIÓN','ANÁLOGO / PROTOLITO / SEDIMENTO','MÉTODO DE DIAGNÓSTICO'];
+  const rows = list.map(r => [r.nombre, r.clase, r.estructura, r.origen, r.clasificacion, r.composicion, r.analogo, r.diagnostico.join('; ')]);
+  const csv = [headers, ...rows].map(row => row.map(v => '"' + String(v).replace(/"/g, '""') + '"').join(',')).join('\r\n');
+  const blob = new Blob(['\ufeff' + csv], {type:'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'tabla-final-rocas.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+/* ============================================================
+   FICHA
+   ============================================================ */
+function openFicha(id) {
+  const r = BY[id];
+  if (!r) return;
+  const idx = ROCKS.indexOf(r);
+  const prev = ROCKS[(idx - 1 + ROCKS.length) % ROCKS.length];
+  const next = ROCKS[(idx + 1) % ROCKS.length];
+  const rows = [
+    ['CLASE DE RXS', r.clase],
+    ['ESTRUCTURA / TEXTURA', r.estructura],
+    ['ORIGEN / TIPO / GRADO', r.origen],
+    ['CLASIFICACIÓN', r.clasificacion],
+    ['MINERALES / COMPOSICIÓN', r.composicion],
+    ['ANÁLOGO / PROTOLITO / SEDIMENTO', r.analogo]
+  ];
+  $('#ov').hidden = false;
+  $('#ov').innerHTML = `<div class="sheet" role="dialog" aria-modal="true" aria-label="Ficha de ${esc(r.nombre)}">
+    <div class="sheet-head">
+      <div class="row"><span class="tag ${r.claseKey}">${r.clase}</span><span class="muted small">${esc(r.subtipo)}</span></div>
+      <button class="icon-btn" data-act="close" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div class="ficha-photo">
+        <img id="ficha-main" src="${esc(r.img)}" alt="${esc(r.nombre)}" data-act="zoom" data-src="${esc(r.img)}">
+        ${r.imgs.length > 1 ? `<div class="thumbs">${r.imgs.map((src,k) => `<button data-act="ficha-img" data-src="${esc(src)}" aria-pressed="${k===0}" aria-label="Foto ${k+1}"><img src="${esc(src)}" alt=""></button>`).join('')}</div>` : ''}
+      </div>
+      <div class="ficha-data">
+        <h2>${esc(r.nombre)}</h2>
+        <dl class="spec">
+          ${rows.map(([k,v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join('')}
+          <dt>MÉTODO DE DIAGNÓSTICO</dt><dd><ul class="diag-list">${r.diagnostico.map(x => `<li>${esc(x)}</li>`).join('')}</ul></dd>
+        </dl>
+        ${r.factores ? `<div class="notice info" style="margin-top:10px"><b>T° y P:</b> ${esc(r.factores)}</div>` : ''}
+        ${r.truco ? `<div class="hook" style="margin-top:10px"><b>Truco</b><br>${esc(r.truco)}</div>` : ''}
+        ${r.notas.length ? `<div class="notice" style="margin-top:10px">${r.notas.map(esc).join('<br>')}</div>` : ''}
+      </div>
+    </div>
+    <div class="sheet-foot">
+      <button class="chip" data-act="ficha" data-id="${prev.id}">← ${esc(prev.nombre)}</button>
+      <button class="chip" data-act="ficha" data-id="${next.id}">${esc(next.nombre)} →</button>
+    </div>
+  </div>`;
+  document.body.style.overflow = 'hidden';
+}
+function closeOverlay() {
+  $('#ov').hidden = true;
+  $('#ov').innerHTML = '';
+  document.body.style.overflow = '';
+}
+function openZoom(src) {
+  $('#ov').hidden = false;
+  $('#ov').innerHTML = `<div class="zoom-wrap"><button class="icon-btn" data-act="close" aria-label="Cerrar">✕</button><img src="${esc(src)}" alt="Imagen ampliada"></div>`;
+  document.body.style.overflow = 'hidden';
+}
+
+/* ============================================================
+   GUÍA
+   ============================================================ */
+function vGuia() {
+  const nIg = ROCKS.filter(r=>r.claseKey==='ig').length;
+  const nSed = ROCKS.filter(r=>r.claseKey==='sed').length;
+  const nMet = ROCKS.filter(r=>r.claseKey==='met').length;
+  $('#main').innerHTML = `
+  <div class="stack">
+    <div class="hero">
+      <div class="kicker">Guía del examen final</div>
+      <h2>Cómo se llena la tabla y cómo se corrige</h2>
+      <p>El test final combina las tres tablas: <b>${nIg} ígneas</b>, <b>${nSed} sedimentarias</b> y <b>${nMet} metamórficas</b>. Cada muestra se corrige con la misma regla: primero nombre y componentes; si esa puerta falla, la fila completa vale cero.</p>
+    </div>
+
+    <div class="panel">
+      <h3>1 · Las columnas del examen</h3>
+      <div class="tbl-wrap" style="max-height:none">
+        <table class="guide-table">
+          <tr><th>Columna</th><th>Qué escribir</th><th>Ejemplo ígnea</th><th>Ejemplo sedimentaria</th><th>Ejemplo metamórfica</th></tr>
+          <tr><td>NOMBRE</td><td>Nombre de la roca, sin abreviar.</td><td>Granito</td><td>Caliza</td><td>Esquisto de mica</td></tr>
+          <tr><td>CLASE DE RXS</td><td>Ígnea, sedimentaria o metamórfica.</td><td>Ígnea</td><td>Sedimentaria</td><td>Metamórfica</td></tr>
+          <tr><td>ESTRUCTURA / TEXTURA</td><td>Textura y/o estructura visible.</td><td>Fanerítica equigranular</td><td>No clástica / Cristalina</td><td>Foliada · Lepidoblástica</td></tr>
+          <tr><td>ORIGEN / TIPO / GRADO</td><td>Origen ígneo, origen sedimentario o tipo y grado metamórfico.</td><td>Plutónico</td><td>Mecánico</td><td>Regional · Bajo grado</td></tr>
+          <tr><td>CLASIFICACIÓN</td><td>Grupo composicional, clase sedimentaria o facie.</td><td>Ácida</td><td>Química</td><td>Esquistos verdes</td></tr>
+          <tr><td>MINERALES / COMPOSICIÓN</td><td>Minerales esenciales y accesorios, o componentes.</td><td>Cuarzo, feldespato alcalino, plagioclasa, biotita</td><td>Principalmente calcita</td><td>Mica, clorita, cuarzo, feldespato</td></tr>
+          <tr><td>ANÁLOGO / PROTOLITO / SEDIMENTO</td><td>Ígnea: no aplica. Sedimentaria: sedimento. Metamórfica: protolito.</td><td>No aplica</td><td>Arena</td><td>Pizarra, argilita, lutita</td></tr>
+          <tr><td>MÉTODO DE DIAGNÓSTICO</td><td>Mínimo 3 rasgos observables que permiten reconocerla.</td><td>Textura fanerítica; cuarzo y feldespato; micas</td><td>Efervescencia con HCl; color claro; textura oolítica</td><td>Foliación; brillo; presencia de micas</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="guide-grid">
+      <div class="panel">
+        <h3>2 · Corrección importante: sedimentarias</h3>
+        <div class="notice bad" style="margin-bottom:10px"><b>La tabla original tenía mal el origen de las sedimentarias.</b> En este test se usa la pauta del examen:</div>
+        <table class="guide-table">
+          <tr><th>Clasificación</th><th>Origen que debes escribir</th></tr>
+          <tr><td>Detrítica</td><td>Mecánico</td></tr>
+          <tr><td>Química</td><td>Medio Químico/Evaporítico/Precipitación</td></tr>
+          <tr><td>Bioquímica</td><td>Bioquímica</td></tr>
+        </table>
+        <p class="muted small" style="margin-top:10px">No escribas «transporte y sedimentación», «medio químico» suelto ni «pantanos con vegetación» en la columna ORIGEN. Esas frases son la explicación, no la categoría del examen.</p>
+      </div>
+
+      <div class="panel">
+        <h3>3 · Cómo se corrige la puerta</h3>
+        <ul style="margin:0;padding-left:1.15rem">
+          <li><b>Nombre:</b> se aceptan el nombre de la tabla y sus sinónimos frecuentes (por ejemplo, «brecha» por «brecha sedimentaria», «gneis» por «gneiss», «dolomita» por «dolomía»).</li>
+          <li><b>Componentes:</b> no hace falta escribir todo con porcentajes. Se acepta la asociación principal de minerales; en sedimentarias basta el componente central (calcita, arcilla, cuarzo, halita…).</li>
+          <li><b>Si falla uno de los dos:</b> la fila cuenta 0 y no se desbloquea el resto. Es la misma regla del test de metamórficas.</li>
+          <li><b>Resto de columnas:</b> se corrige automáticamente. Puedes corregir el veredicto si tu respuesta era equivalente; el método de diagnóstico lo autoevalúas.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="guide-grid">
+      <div class="panel">
+        <h3>4 · Claves rápidas · ígneas</h3>
+        <ul style="margin:0;padding-left:1.15rem">
+          <li><b>Textura:</b> fanerítica (granos visibles) → plutónica/hipabisal; afanítica o vítrea → efusiva; piroclástica → toba, brecha, aglomerado.</li>
+          <li><b>Color y densidad:</b> oscura y pesada → básica/ultrabásica; clara → ácida.</li>
+          <li><b>Cuarzo + feldespato alcalino + plagioclasa + mica</b> → granito; sin cuarzo → sienita; con plagioclasa dominante y máficos → diorita/gabro.</li>
+          <li><b>Vidrio</b> → obsidiana, pómez, escoria.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>5 · Claves rápidas · sedimentarias</h3>
+        <ul style="margin:0;padding-left:1.15rem">
+          <li><b>Detrítica:</b> granos/clastos. Pelita (limo/arcilla), psamita (arena), psefita (grava).</li>
+          <li><b>Química:</b> no clástica, cristalina o masiva; calcita/dolomita, yeso, halita, sílice.</li>
+          <li><b>Bioquímica:</b> conchas (coquina) o materia orgánica (carbón).</li>
+          <li><b>Prueba clave:</b> HCl → carbonatos; dureza baja → yeso; sabor salado → halita; grano al tacto → arena.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="guide-grid">
+      <div class="panel">
+        <h3>6 · Claves rápidas · metamórficas</h3>
+        <ul style="margin:0;padding-left:1.15rem">
+          <li><b>Foliada:</b> pizarra → filita → esquisto → gneiss, con aumento de grado y tamaño de grano.</li>
+          <li><b>No foliada:</b> mármol (calcita), cuarcita (cuarzo), corneana (contacto), skarn (metasomatismo).</li>
+          <li><b>Cataclástica:</b> milonita, con granos orientados y textura milonítica.</li>
+          <li><b>Protolito:</b> pizarra/argilita/lutita para las pelíticas; caliza/dolomía para mármol; arenisca para cuarcita; basaltos para anfibolita.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>7 · Método de diagnóstico (mín. 3)</h3>
+        <p class="muted small" style="margin-bottom:8px">Escribe rasgos concretos, separados por punto y coma. No repitas el nombre de la roca como si fuera un rasgo.</p>
+        <div class="hook"><b>Ejemplo</b><br>Foliación penetrativa; brillo sedoso; presencia de micas; se abre en láminas.</div>
+        <p class="muted small" style="margin-top:8px">En el test, el campo exige al menos 3 rasgos antes de corregir. Después lo autoevalúas con «Lo tenía / No lo tenía».</p>
+      </div>
+    </div>
+
+    <details>
+      <summary>Diagramas de apoyo (metamórficas)</summary>
+      <div class="guide-grid">
+        <figure class="figure"><img src="fotos-final/met-c_facies.jpg" alt="Diagrama de facies metamórficas" loading="lazy"><figcaption>Facies metamórficas del PPT: T y P.</figcaption></figure>
+        <figure class="figure"><img src="fotos-final/met-c_texturas.jpg" alt="Texturas metamórficas" loading="lazy"><figcaption>Texturas: granoblástica, lepidoblástica, nematoblástica, porfidoblástica.</figcaption></figure>
+      </div>
+    </details>
+
+    <div class="panel">
+      <h3>8 · Notas de las fuentes</h3>
+      <ul style="margin:0;padding-left:1.15rem">
+        <li>Las imágenes de muestra se tomaron de las tres apps originales y se verificó que no tuvieran el nombre impreso.</li>
+        <li>En <b>esquisto de serpentina</b>, el PPT repite los componentes del esquisto de albita. La ficha conserva la fuente y advierte; en la puerta se acepta también serpentina, talco o magnetita.</li>
+        <li>En <b>filita</b>, el PPT escribe «limonita» como protolito (probablemente limolita). Se conserva la nota.</li>
+        <li>Los datos de ígneas y metamórficas provienen de sus tablas; las sedimentarias se ajustaron a la pauta de origen/clasificación del examen.</li>
+      </ul>
+    </div>
+  </div>`;
+}
+
+/* ============================================================
+   EVENTOS
+   ============================================================ */
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]');
+  if (!b) return;
+  const a = b.dataset.act;
+  if (a === 'tab') { go(b.dataset.v); return; }
+  if (a === 'theme') {
+    const cur = document.documentElement.dataset.theme;
+    const next = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    store.set('tf_theme', next);
+    return;
+  }
+  if (a === 'mode') { cfg.mode = b.dataset.m; testSetup(); return; }
+  if (a === 'mix-random') { randomMix(); return; }
+  if (a === 'start') { startTest(b.dataset.src); return; }
+  if (a === 'check1') { checkGate(); return; }
+  if (a === 'check2') { checkTable(); return; }
+  if (a === 'next') {
+    T.i++;
+    vTest();
+    window.scrollTo({top:0, behavior:'smooth'});
+    return;
+  }
+  if (a === 'mark') {
+    const y = window.scrollY;
+    T.res[T.i].v[b.dataset.k] = b.dataset.v === '1';
+    testRock();
+    window.scrollTo(0, y);
+    return;
+  }
+  if (a === 'ficha') {
+    e.preventDefault();
+    openFicha(b.dataset.id);
+    return;
+  }
+  if (a === 'ficha-img') {
+    const main = $('#ficha-main');
+    if (main) main.src = b.dataset.src;
+    $$('.thumbs button').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+    return;
+  }
+  if (a === 'zoom') { openZoom(b.dataset.src); return; }
+  if (a === 'close') { closeOverlay(); return; }
+  if (a === 'study-filter') { study.filter = b.dataset.f; vEstudiar(); return; }
+  if (a === 'study-hide') { study.hide = !study.hide; vEstudiar(); return; }
+  if (a === 'table-filter') { table.filter = b.dataset.f; vTabla(); return; }
+  if (a === 'csv') { downloadCSV(); return; }
+  if (a === 'reset') { T = null; testSetup(); return; }
+});
+
+document.addEventListener('input', e => {
+  const el = e.target;
+  if (el.id === 'study-q') { study.q = el.value; renderStudyGrid(); return; }
+  if (el.id === 'table-q') { table.q = el.value; renderTableRows(); return; }
+  const mk = el.dataset.mix;
+  if (mk) {
+    const n = Math.max(0, Math.min(10, parseInt(el.value, 10) || 0));
+    cfg.mix[mk] = n;
+    if (el.value !== '' && n !== Number(el.value)) el.value = n;
+    updateMixUI();
+    return;
+  }
+  const k = el.dataset.k;
+  if (!k || !T) return;
+  const res = T.res[T.i];
+  res.ans[k] = el.value;
+  if (k === 'diagnostico') {
+    const n = diagCount(el.value);
+    const count = $('#diag-count'), warn = $('#diag-warn');
+    if (count) count.textContent = `${n}/3 rasgos`;
+    if (warn) {
+      warn.className = n >= 3 ? 'ok' : 'short';
+      warn.textContent = n >= 3 ? 'mínimo cumplido' : 'faltan rasgos';
+    }
+  }
+});
+
+document.addEventListener('change', e => {
+  const el = e.target;
+  const k = el.dataset.k;
+  if (!k || !T) return;
+  T.res[T.i].ans[k] = el.value;
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && !$('#ov').hidden) closeOverlay();
+});
+
+/* ============================================================
+   INICIO
+   ============================================================ */
+$('#foot-count').textContent = ` ${ROCKS.length} rocas en total: ${ROCKS.filter(r=>r.claseKey==='ig').length} ígneas, ${ROCKS.filter(r=>r.claseKey==='sed').length} sedimentarias y ${ROCKS.filter(r=>r.claseKey==='met').length} metamórficas.`;
+renderTabs();
+vTest();
+</script>
+</body>
+</html>
